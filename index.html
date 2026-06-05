@@ -62,7 +62,11 @@ Discover places that match your mood, not the crowd.
 
 <button onclick="findPlace()">Find My Place</button>
 
-<div id="results" style="margin-top:30px;"></div>
+<<h2 id="resultsTitle" style="display:none; margin-top:40px;">
+Your Matches
+</h2>
+
+<div id="results" style="margin-top:20px;"></div>
 
     <script>
 async function findPlace() {
@@ -105,7 +109,8 @@ async function findPlace() {
         });
     }
 
-    document.getElementById("results").innerHTML = html;
+    document.getElementById("resultsTitle").style.display = "block";
+document.getElementById("results").innerHTML = html;
 }
 </script>
 </body>
