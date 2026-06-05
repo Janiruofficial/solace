@@ -58,6 +58,15 @@ button{
     img{
     margin-bottom:20px;
 }
+    }
+select{
+    padding:12px;
+    margin:6px;
+    border-radius:10px;
+    background:rgba(22,27,34,0.85);
+    color:white;
+    border:1px solid rgba(255,255,255,0.2);
+    font-size:15px;
 }
 </style>
 
@@ -74,10 +83,44 @@ Discover places that match your mood, not the crowd.
 
 <textarea id="userInput" placeholder="Describe your ideal place..."></textarea>
 
+<div style="margin-top:20px;">
+  <select id="budgetFilter">
+    <option value="">Any budget</option>
+    <option value="0">Free</option>
+    <option value="2500">Under 2500 LKR</option>
+    <option value="5000">Under 5000 LKR</option>
+    <option value="10000">Under 10000 LKR</option>
+  </select>
+
+  <select id="crowdFilter">
+    <option value="">Any crowd level</option>
+    <option value="3">Low crowd</option>
+    <option value="6">Medium or lower</option>
+    <option value="10">Any crowd</option>
+  </select>
+
+  <select id="timeFilter">
+    <option value="">Any time</option>
+    <option value="morning">Morning</option>
+    <option value="afternoon">Afternoon</option>
+    <option value="evening">Evening</option>
+    <option value="sunset">Sunset</option>
+    <option value="night">Night</option>
+  </select>
+
+  <select id="moodFilter">
+    <option value="">Any mood</option>
+    <option value="peaceful">Peaceful</option>
+    <option value="reflective">Reflective</option>
+    <option value="healing">Healing</option>
+    <option value="inspired">Inspired</option>
+    <option value="romantic">Romantic</option>
+  </select>
+</div>
+
 <br>
 
 <button onclick="findPlace()">Find My Place</button>
-
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
 Your Matches
 </h2>
