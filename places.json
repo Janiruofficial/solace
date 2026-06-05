@@ -15,7 +15,8 @@
     "peace_score": 10,
     "aesthetic_score": 9,
     "privacy_score": 10,
-    "image": "silentbeach.jpg"
+    "mood_image": "silentbeach_mood.jpg",
+"real_image": "silentbeach_real.jpg"
   },
  
   {
