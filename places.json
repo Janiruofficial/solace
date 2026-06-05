@@ -1,20 +1,92 @@
 [
   {
-    "name": "Cinnamon Life",
-    "city": "Colombo",
-    "tags": ["luxury", "calm", "city", "solo", "aesthetic"],
-    "description": "A premium calm city space, good for sitting alone, relaxing, and enjoying a refined atmosphere."
-  },
-  {
     "name": "Silent Beach",
     "city": "Tangalle",
-    "tags": ["ocean", "peaceful", "solo", "hidden", "sunset"],
-    "description": "A quiet beach with ocean air, ideal for thinking, walking, and escaping noise."
+    "description": "A quiet beach with soft ocean sounds, calm views, and a peaceful atmosphere. Good for walking alone, thinking, and watching the sunset.",
+    "tags": ["ocean", "beach", "peaceful", "quiet", "solo", "sunset", "hidden", "calm", "nature"],
+    "budget": "free",
+    "best_time": "sunset",
+    "crowd": "low"
+  },
+  {
+    "name": "Rekawa Beach",
+    "city": "Tangalle",
+    "description": "A natural coastal area with quiet surroundings, ocean air, and a slow peaceful feeling. Good for people who want space away from noise.",
+    "tags": ["ocean", "beach", "nature", "peaceful", "solo", "quiet", "wild", "calm", "hidden"],
+    "budget": "free",
+    "best_time": "evening",
+    "crowd": "low"
+  },
+  {
+    "name": "Ussangoda",
+    "city": "Hambantota",
+    "description": "A wide open red-earth landscape near the ocean. Feels unusual, cinematic, quiet, and different from normal tourist places.",
+    "tags": ["nature", "ocean", "cinematic", "quiet", "open", "photography", "sunset", "unique", "peaceful"],
+    "budget": "free",
+    "best_time": "late afternoon",
+    "crowd": "low"
   },
   {
     "name": "Galle Fort",
     "city": "Galle",
-    "tags": ["aesthetic", "historic", "walking", "sunset", "calm"],
-    "description": "A beautiful historic area with cafés, ocean views, and calm evening walks."
+    "description": "A historic coastal town with cafés, ocean views, old streets, and a calm aesthetic atmosphere. Good for walking, photos, and slow evenings.",
+    "tags": ["historic", "ocean", "cafe", "walking", "aesthetic", "sunset", "calm", "photography", "solo"],
+    "budget": "medium",
+    "best_time": "evening",
+    "crowd": "medium"
+  },
+  {
+    "name": "Cinnamon Life",
+    "city": "Colombo",
+    "description": "A luxury city space with refined interiors, calm seating areas, and an expensive peaceful atmosphere. Good for relaxing, thinking, or feeling inspired.",
+    "tags": ["luxury", "city", "calm", "aesthetic", "solo", "premium", "peaceful", "indoor", "colombo"],
+    "budget": "high",
+    "best_time": "afternoon or evening",
+    "crowd": "medium"
+  },
+  {
+    "name": "Lotus Tower View Area",
+    "city": "Colombo",
+    "description": "A city-view location with skyline energy, lights, and a modern Colombo atmosphere. Good for people who want city views and a reflective mood.",
+    "tags": ["city", "view", "skyline", "night", "aesthetic", "photography", "modern", "colombo"],
+    "budget": "medium",
+    "best_time": "evening",
+    "crowd": "medium"
+  },
+  {
+    "name": "Haputale",
+    "city": "Haputale",
+    "description": "A mountain town with mist, cool air, tea estates, and peaceful views. Good for people who want quiet nature and a deep reflective atmosphere.",
+    "tags": ["mountains", "mist", "nature", "peaceful", "quiet", "tea", "cold", "view", "solo"],
+    "budget": "medium",
+    "best_time": "morning",
+    "crowd": "low"
+  },
+  {
+    "name": "Lipton's Seat",
+    "city": "Haputale",
+    "description": "A famous viewpoint surrounded by tea estates and mountain scenery. Best for sunrise, fresh air, and quiet thinking.",
+    "tags": ["mountains", "view", "sunrise", "tea", "nature", "peaceful", "quiet", "photography", "cold"],
+    "budget": "low",
+    "best_time": "sunrise",
+    "crowd": "medium"
+  },
+  {
+    "name": "Ohiya",
+    "city": "Ohiya",
+    "description": "A quiet mountain village with cold air, forest surroundings, and a lonely peaceful feeling. Good for escaping the busy world.",
+    "tags": ["mountains", "forest", "cold", "quiet", "peaceful", "hidden", "nature", "solo", "mist"],
+    "budget": "medium",
+    "best_time": "morning",
+    "crowd": "low"
+  },
+  {
+    "name": "Sinharaja Forest",
+    "city": "Sinharaja",
+    "description": "A rainforest area full of nature, greenery, sounds of birds, and deep peaceful energy. Good for people who want a natural reset.",
+    "tags": ["forest", "rainforest", "nature", "green", "peaceful", "walking", "wild", "quiet", "reset"],
+    "budget": "medium",
+    "best_time": "morning",
+    "crowd": "low"
   }
 ]
