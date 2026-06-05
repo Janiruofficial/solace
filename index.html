@@ -151,6 +151,7 @@ Discover places that match your mood, not the crowd.
 <br>
 
 <button onclick="findPlace()">Find My Place</button>
+<button onclick="showAllPlaces()">All Places</button>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
 Your Matches
 </h2>
@@ -258,6 +259,42 @@ matches = matches.slice(0, 5);
 
     document.getElementById("resultsTitle").style.display = "block";
 document.getElementById("results").innerHTML = html;
+}
+        async function showAllPlaces() {
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    let html = "<h2>All Places</h2>";
+
+    places.forEach(place => {
+        html += `
+            <div onclick='showPlaceDetails(${JSON.stringify(place)})'
+                 style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
+                <h2>${place.name}</h2>
+                <p>${place.city}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("results").innerHTML = html;
+}
+
+function showPlaceDetails(place) {
+    let html = `
+        <div style="background:#161b22;padding:25px;border-radius:18px;margin:20px auto;max-width:750px;">
+            <h2>${place.name}</h2>
+            <p><strong>City:</strong> ${place.city}</p>
+            <p>${place.description}</p>
+            <p><strong>Budget:</strong> ${place.budget_label}</p>
+            <p><strong>Crowd:</strong> ${place.crowd_label}</p>
+            <p><strong>Best time:</strong> ${place.best_time.join(", ")}</p>
+            <p><strong>Moods:</strong> ${place.moods.join(", ")}</p>
+            <p><strong>Aesthetics:</strong> ${place.aesthetics.join(", ")}</p>
+            <button onclick="showAllPlaces()">Back to All Places</button>
+        </div>
+    `;
+
+    document.getElementById("results").innerHTML = html;
 }
 </script>
 </body>
