@@ -1,13 +1,28 @@
 [
   {
-    "name": "Silent Beach",
-    "city": "Tangalle",
-    "description": "A quiet beach with soft ocean sounds, calm views, and a peaceful atmosphere. Good for walking alone, thinking, and watching the sunset.",
-    "tags": ["ocean", "beach", "peaceful", "quiet", "solo", "sunset", "hidden", "calm", "nature"],
-    "budget": "free",
-    "best_time": "sunset",
-    "crowd": "low"
-  },
+  "name": "Silent Beach",
+  "city": "Tangalle",
+
+  "description": "A hidden stretch of coastline with golden sand, palm trees, gentle waves, and very few visitors. One of the best places in southern Sri Lanka for reflection, solitude, sunsets, and escaping busy tourist areas. Ideal for long walks, photography, quiet thinking, and reconnecting with nature.",
+
+  "tags": ["beach", "ocean", "sea", "waves", "shore", "coast", "sand", "palm trees", "hidden gem", "nature", "sunset", "sunrise", "quiet", "peaceful", "calm", "solo", "walking", "photography", "relaxing", "escape", "private", "uncrowded", "tropical", "blue water", "ocean view", "coastal", "natural", "tranquil", "secluded", "remote"],
+
+  "moods": ["peaceful", "reflective", "healing", "free", "grounded", "relaxed", "restored", "hopeful", "calm", "connected", "mindful", "escapist", "thoughtful", "balanced", "refreshed"],
+
+  "aesthetics": ["coastal", "tropical", "minimal", "cinematic", "golden hour", "sunset", "moonlit", "dreamy", "natural", "oceanic", "serene", "untouched", "wild beauty", "warm tones", "blue horizons"],
+
+  "budget": 0,
+  "budget_label": "Free",
+
+  "best_time": "Sunset",
+
+  "crowd": 2,
+  "crowd_label": "Low",
+
+  "peace_score": 10,
+  "aesthetic_score": 9,
+  "privacy_score": 10
+},
   {
     "name": "Rekawa Beach",
     "city": "Tangalle",
