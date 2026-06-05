@@ -59,14 +59,30 @@ button{
     margin-bottom:20px;
 }
     }
+.filters{
+    margin:25px auto 10px auto;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    max-width:900px;
+}
+
 select{
-    padding:12px;
-    margin:6px;
-    border-radius:10px;
-    background:rgba(22,27,34,0.85);
+    padding:14px 18px;
+    border-radius:14px;
+    background:rgba(22,27,34,0.88);
     color:white;
-    border:1px solid rgba(255,255,255,0.2);
+    border:1px solid rgba(255,255,255,0.22);
     font-size:15px;
+    outline:none;
+    backdrop-filter:blur(8px);
+    cursor:pointer;
+}
+
+select:hover{
+    border-color:#a78bfa;
+    box-shadow:0 0 15px rgba(124,58,237,0.35);
 }
 </style>
 
@@ -83,20 +99,21 @@ Discover places that match your mood, not the crowd.
 
 <textarea id="userInput" placeholder="Describe your ideal place..."></textarea>
 
-<div style="margin-top:20px;">
+<div class="filters">
   <select id="budgetFilter">
     <option value="">Any budget</option>
     <option value="0">Free</option>
-    <option value="2500">Under 2500 LKR</option>
-    <option value="5000">Under 5000 LKR</option>
-    <option value="10000">Under 10000 LKR</option>
+    <option value="1000">Under 1,000 LKR</option>
+    <option value="2500">Under 2,500 LKR</option>
+    <option value="5000">Under 5,000 LKR</option>
+    <option value="10000">Under 10,000 LKR</option>
   </select>
 
   <select id="crowdFilter">
-    <option value="">Any crowd level</option>
+    <option value="">Any crowd</option>
     <option value="3">Low crowd</option>
     <option value="6">Medium or lower</option>
-    <option value="10">Any crowd</option>
+    <option value="10">Any crowd level</option>
   </select>
 
   <select id="timeFilter">
@@ -115,6 +132,19 @@ Discover places that match your mood, not the crowd.
     <option value="healing">Healing</option>
     <option value="inspired">Inspired</option>
     <option value="romantic">Romantic</option>
+    <option value="motivated">Motivated</option>
+    <option value="free">Free</option>
+  </select>
+
+  <select id="aestheticFilter">
+    <option value="">Any aesthetic</option>
+    <option value="coastal">Coastal</option>
+    <option value="luxury">Luxury</option>
+    <option value="cinematic">Cinematic</option>
+    <option value="mountain">Mountain</option>
+    <option value="modern">Modern</option>
+    <option value="natural">Natural</option>
+    <option value="city lights">City lights</option>
   </select>
 </div>
 
@@ -135,7 +165,13 @@ async function findPlace() {
     const response = await fetch("places.json");
     const places = await response.json();
 
-  let matches = [];
+let matches = [];
+
+const budgetFilter = document.getElementById("budgetFilter").value;
+const crowdFilter = document.getElementById("crowdFilter").value;
+const timeFilter = document.getElementById("timeFilter").value.toLowerCase();
+const moodFilter = document.getElementById("moodFilter").value.toLowerCase();
+const aestheticFilter = document.getElementById("aestheticFilter").value.toLowerCase();
 
 places.forEach(place => {
     let score = 0;
@@ -145,9 +181,12 @@ places.forEach(place => {
         ${place.city}
         ${place.description}
         ${place.tags.join(" ")}
-        ${place.budget}
-        ${place.best_time}
-        ${place.crowd}
+        ${place.moods.join(" ")}
+        ${place.aesthetics.join(" ")}
+        ${place.activities.join(" ")}
+        ${place.budget_label}
+        ${place.crowd_label}
+        ${place.best_time.join(" ")}
     `.toLowerCase();
 
     const userWords = userText
@@ -157,11 +196,41 @@ places.forEach(place => {
 
     userWords.forEach(word => {
         if (searchableText.includes(word)) {
-            score++;
+            score += 1;
         }
     });
 
-    if (score > 0) {
+    if (budgetFilter !== "" && place.budget <= Number(budgetFilter)) {
+        score += 3;
+    } else if (budgetFilter !== "") {
+        score -= 5;
+    }
+
+    if (crowdFilter !== "" && place.crowd <= Number(crowdFilter)) {
+        score += 3;
+    } else if (crowdFilter !== "") {
+        score -= 5;
+    }
+
+    if (timeFilter !== "" && place.best_time.map(t => t.toLowerCase()).includes(timeFilter)) {
+        score += 3;
+    } else if (timeFilter !== "") {
+        score -= 3;
+    }
+
+    if (moodFilter !== "" && place.moods.map(m => m.toLowerCase()).includes(moodFilter)) {
+        score += 4;
+    } else if (moodFilter !== "") {
+        score -= 3;
+    }
+
+    if (aestheticFilter !== "" && place.aesthetics.map(a => a.toLowerCase()).includes(aestheticFilter)) {
+        score += 4;
+    } else if (aestheticFilter !== "") {
+        score -= 3;
+    }
+
+    if (score > 0 || userText.trim() === "") {
         matches.push({
             ...place,
             score: score
