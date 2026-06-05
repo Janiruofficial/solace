@@ -52,11 +52,57 @@ button{
 Discover places that match your mood, not the crowd.
 </p>
 
-<textarea placeholder="Describe your ideal place..."></textarea>
+<textarea id="userInput" placeholder="Describe your ideal place..."></textarea>
 
 <br>
 
-<button>Find My Place</button>
+<button onclick="findPlace()">Find My Place</button>
 
+<div id="results" style="margin-top:30px;"></div>
+
+    <script>
+async function findPlace() {
+
+    const userText = document.getElementById("userInput").value.toLowerCase();
+
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    let matches = [];
+
+    places.forEach(place => {
+
+        const tags = place.tags.join(" ").toLowerCase();
+
+        if (
+            userText.includes("ocean") && tags.includes("ocean") ||
+            userText.includes("beach") && tags.includes("ocean") ||
+            userText.includes("peace") && tags.includes("peaceful") ||
+            userText.includes("calm") && tags.includes("calm") ||
+            userText.includes("luxury") && tags.includes("luxury")
+        ) {
+            matches.push(place);
+        }
+    });
+
+    let html = "";
+
+    if(matches.length === 0){
+        html = "<p>No matches found yet.</p>";
+    } else {
+
+        matches.forEach(place => {
+            html += `
+                <div style="background:#161b22;padding:20px;border-radius:15px;margin:15px auto;max-width:700px;">
+                    <h2>${place.name}</h2>
+                    <p>${place.description}</p>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
+</script>
 </body>
 </html>
