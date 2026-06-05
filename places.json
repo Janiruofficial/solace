@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Cinnamon Life",
+    "city": "Colombo",
+    "tags": ["luxury", "calm", "city", "solo", "aesthetic"],
+    "description": "A premium calm city space, good for sitting alone, relaxing, and enjoying a refined atmosphere."
+  },
+  {
+    "name": "Silent Beach",
+    "city": "Tangalle",
+    "tags": ["ocean", "peaceful", "solo", "hidden", "sunset"],
+    "description": "A quiet beach with ocean air, ideal for thinking, walking, and escaping noise."
+  },
+  {
+    "name": "Galle Fort",
+    "city": "Galle",
+    "tags": ["aesthetic", "historic", "walking", "sunset", "calm"],
+    "description": "A beautiful historic area with cafés, ocean views, and calm evening walks."
+  }
+]
