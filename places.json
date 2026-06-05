@@ -35,7 +35,8 @@
     "peace_score": 7,
     "aesthetic_score": 10,
     "privacy_score": 7,
-    "image": "cinnamonlife.jpg"
+   "mood_image": "cinnamonlife_mood.jpg",
+"real_image": "cinnamonlife_real.jpg"
   },
   {
     "name": "Rekawa Beach",
@@ -53,7 +54,8 @@
     "peace_score": 10,
     "aesthetic_score": 8,
     "privacy_score": 9,
-    "image": "rekawa.jpg"
+    "mood_image": "rekawa_mood.jpg",
+"real_image": "rekawa_real.jpg"
   },
   {
     "name": "Ussangoda",
@@ -71,7 +73,8 @@
     "peace_score": 8,
     "aesthetic_score": 10,
     "privacy_score": 8,
-    "image": "ussangoda.jpg"
+    "mood_image": "ussangoda_mood.jpg",
+"real_image": "ussangoda_real.jpg"
   },
   {
     "name": "Galle Fort",
