@@ -92,23 +92,42 @@ async function findPlace() {
     const response = await fetch("places.json");
     const places = await response.json();
 
-    let matches = [];
+  let matches = [];
 
-    places.forEach(place => {
+places.forEach(place => {
+    let score = 0;
 
-        const tags = place.tags.join(" ").toLowerCase();
+    const searchableText = `
+        ${place.name}
+        ${place.city}
+        ${place.description}
+        ${place.tags.join(" ")}
+        ${place.budget}
+        ${place.best_time}
+        ${place.crowd}
+    `.toLowerCase();
 
-        if (
-            userText.includes("ocean") && tags.includes("ocean") ||
-            userText.includes("beach") && tags.includes("ocean") ||
-            userText.includes("peace") && tags.includes("peaceful") ||
-            userText.includes("calm") && tags.includes("calm") ||
-            userText.includes("luxury") && tags.includes("luxury")
-        ) {
-            matches.push(place);
+    const userWords = userText
+        .split(" ")
+        .map(word => word.trim())
+        .filter(word => word.length > 2);
+
+    userWords.forEach(word => {
+        if (searchableText.includes(word)) {
+            score++;
         }
     });
 
+    if (score > 0) {
+        matches.push({
+            ...place,
+            score: score
+        });
+    }
+});
+
+matches.sort((a, b) => b.score - a.score);
+matches = matches.slice(0, 5);
     let html = "";
 
     if(matches.length === 0){
