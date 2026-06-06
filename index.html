@@ -558,29 +558,21 @@ onAuthStateChanged(auth, (user) => {
     return;
   }
 window.sharePlace = async function(placeName) {
+  const shareText =
+    `🌙 Check out ${placeName} on Solace AI\n\n` +
+    `Discover places that match your mood.\n\n` +
+    `https://janiruofficial.github.io/solace/`;
 
-    const shareText =
-        `🌙 Check out "${placeName}" on Solace AI\n\n` +
-        `Discover places that match your mood.\n\n` +
-        window.location.href;
-
-    if (navigator.share) {
-
-        try {
-            await navigator.share({
-                title: placeName,
-                text: shareText
-            });
-        } catch(err) {
-            console.log(err);
-        }
-
-    } else {
-
-        navigator.clipboard.writeText(shareText);
-
-        alert("📋 Link copied to clipboard!");
-    }
+  if (navigator.share) {
+    await navigator.share({
+      title: `Solace AI - ${placeName}`,
+      text: shareText,
+      url: "https://janiruofficial.github.io/solace/"
+    });
+  } else {
+    await navigator.clipboard.writeText(shareText);
+    alert("📋 Share text copied!");
+  }
 };
   const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
 
