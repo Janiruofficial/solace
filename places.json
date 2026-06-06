@@ -92,7 +92,8 @@
     "peace_score": 6,
     "aesthetic_score": 9,
     "privacy_score": 4,
-    "image": "gallefort.jpg"
+    "mood_image": "gallefort_mood.jpg",
+"real_image": "gallefort_real.jpg"
   },
   {
     "name": "Haputale",
@@ -110,7 +111,8 @@
     "peace_score": 10,
     "aesthetic_score": 9,
     "privacy_score": 8,
-    "image": "haputale.jpg"
+    "mood_image": "haputale_mood.jpg",
+"real_image": "haputale_real.jpg"
   },
   {
     "name": "Lipton's Seat",
@@ -128,7 +130,8 @@
     "peace_score": 8,
     "aesthetic_score": 10,
     "privacy_score": 6,
-    "image": "liptonsseat.jpg"
+   "mood_image": "liptonsseat_mood.jpg",
+"real_image": "liptonsseat_real.jpg"
   },
   {
     "name": "Ohiya",
@@ -146,7 +149,8 @@
     "peace_score": 10,
     "aesthetic_score": 8,
     "privacy_score": 9,
-    "image": "ohiya.jpg"
+"mood_image": "ohiya_mood.jpg",
+"real_image": "ohiya_real.jpg"
   },
   {
     "name": "Sinharaja Forest",
@@ -164,7 +168,8 @@
     "peace_score": 9,
     "aesthetic_score": 9,
     "privacy_score": 7,
-    "image": "sinharaja.jpg"
+   "mood_image": "sinharaja_mood.jpg",
+"real_image": "sinharaja_real.jpg"
   },
   {
     "name": "Lotus Tower View Area",
@@ -182,6 +187,7 @@
     "peace_score": 5,
     "aesthetic_score": 8,
     "privacy_score": 3,
-    "image": "lotustower.jpg"
+    "mood_image": "lotustower_mood.jpg",
+"real_image": "lotustower_real.jpg"
   }
 ]
