@@ -397,7 +397,7 @@ function showPlaceDetails(place) {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     const firebaseConfig = {
   apiKey: "AIzaSyCw_Ro5WrZ94vnbvleHU4ZhzLDspqz0nLY",
   authDomain: "solace-d6976.firebaseapp.com",
@@ -440,6 +440,26 @@ onAuthStateChanged(auth, (user) => {
     alert("Please sign in with Google first.");
     return;
   }
+        window.removeSavedPlace = async function(placeName) {
+
+  if (!window.currentUser) return;
+
+  const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
+
+  await deleteDoc(
+    doc(
+      db,
+      "users",
+      window.currentUser.uid,
+      "savedPlaces",
+      safePlaceId
+    )
+  );
+
+  alert(`${placeName} removed`);
+
+  showSavedPlaces();
+};
 
   const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
 
@@ -473,12 +493,23 @@ onAuthStateChanged(auth, (user) => {
 
       if (place) {
         html += `
-          <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
-               style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
-            <h2>${place.name}</h2>
-            <p>${place.city}</p>
-          </div>
-        `;
+        html += `
+<div style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;">
+
+    <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+         style="cursor:pointer;">
+        <h2>${place.name}</h2>
+        <p>${place.city}</p>
+    </div>
+
+    <button
+      onclick="removeSavedPlace('${place.name.replaceAll("'", "\\'")}')"
+      style="margin-top:10px;background:#c0392b;">
+      ❌ Remove
+    </button>
+
+</div>
+`;
       }
     });
   }
