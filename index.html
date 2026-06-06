@@ -215,6 +215,7 @@ Discover places that match your mood, not the crowd.
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
 <button onclick="logoutUser()">Logout</button>
 <button onclick="showSavedPlaces()">❤️ My Saved Places</button>
+    <button onclick="showRecentlyViewed()">🕘 Recently Viewed</button>
 
 <p id="userInfo"></p>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
@@ -351,6 +352,7 @@ document.getElementById("results").innerHTML = html;
 }
 
 function showPlaceDetails(place) {
+    saveRecentlyViewed(place.name);
     let html = `
         <div class="place-detail-card">
 
@@ -494,6 +496,45 @@ window.showPlaceDetailsBySavedName = async function(placeName) {
     showPlaceDetails(place);
   }
 };
+    function saveRecentlyViewed(placeName) {
+    let recent = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+    recent = recent.filter(name => name !== placeName);
+    recent.unshift(placeName);
+
+    recent = recent.slice(0, 5);
+
+    localStorage.setItem("recentlyViewed", JSON.stringify(recent));
+}
+
+async function showRecentlyViewed() {
+    const recent = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    let html = "<h2>🕘 Recently Viewed</h2>";
+
+    if (recent.length === 0) {
+        html += "<p>No recently viewed places yet.</p>";
+    } else {
+        recent.forEach(placeName => {
+            const place = places.find(p => p.name === placeName);
+
+            if (place) {
+                html += `
+                    <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+                         style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
+                        <h2>${place.name}</h2>
+                        <p>${place.city}</p>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
 </script>
 
 </body>
