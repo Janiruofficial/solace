@@ -500,7 +500,7 @@ window.showPlaceDetails = function(place) {
 
            ${window.currentUser ? `<button onclick="savePlace('${place.name.replaceAll("'", "\\'")}')">❤️ Save Place</button>` : ""}
 <button onclick="window.sharePlace('${place.name.replaceAll("'", "\\'")}')">
-    📤 Share This Place
+    📋 Copy Share Text
 </button>
 <button onclick="showAllPlaces()">Back to All Places</button>
         </div>
@@ -557,23 +557,7 @@ onAuthStateChanged(auth, (user) => {
     alert("Please sign in with Google first.");
     return;
   }
-window.sharePlace = async function(placeName) {
-  const shareText =
-    `🌙 Check out ${placeName} on Solace AI\n\n` +
-    `Discover places that match your mood.\n\n` +
-    `https://janiruofficial.github.io/solace/`;
 
-  if (navigator.share) {
-    await navigator.share({
-      title: `Solace AI - ${placeName}`,
-      text: shareText,
-      url: "https://janiruofficial.github.io/solace/"
-    });
-  } else {
-    await navigator.clipboard.writeText(shareText);
-    alert("📋 Share text copied!");
-  }
-};
   const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
 
   await setDoc(
@@ -646,7 +630,20 @@ window.removeSavedPlace = async function(placeName) {
 
   document.getElementById("results").innerHTML = html;
 };
+window.sharePlace = function(placeName) {
+  const shareText =
+    "🌙 Check out " + placeName + " on Solace AI\n\n" +
+    "Discover places that match your mood.\n\n" +
+    "https://janiruofficial.github.io/solace/";
 
+  navigator.clipboard.writeText(shareText)
+    .then(() => {
+      alert("📋 Share text copied!");
+    })
+    .catch(() => {
+      alert(shareText);
+    });
+};
 window.showPlaceDetailsBySavedName = async function(placeName) {
   const response = await fetch("places.json");
   const places = await response.json();
