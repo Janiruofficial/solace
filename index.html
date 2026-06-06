@@ -313,14 +313,27 @@ matches = matches.slice(0, 5);
         html = "<p>No matches found yet.</p>";
     } else {
 
-        matches.forEach(place => {
-            html += `
-                <div style="background:#161b22;padding:20px;border-radius:15px;margin:15px auto;max-width:700px;">
-                    <h2>${place.name}</h2>
-                    <p>${place.description}</p>
+       matches.forEach(place => {
+    html += `
+        <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+             class="match-card">
+
+            <img src="${place.real_image || place.mood_image}" class="match-image">
+
+            <div class="match-text">
+                <h2>${place.name}</h2>
+                <p class="match-city">📍 ${place.city}</p>
+                <p>${place.description}</p>
+                <div class="mini-badges">
+                    <span>💰 ${place.budget_label}</span>
+                    <span>👥 ${place.crowd_label}</span>
+                    <span>🕒 ${place.best_time.join(", ")}</span>
                 </div>
-            `;
-        });
+            </div>
+
+        </div>
+    `;
+});
     }
 
     document.getElementById("resultsTitle").style.display = "block";
@@ -563,6 +576,63 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
+    .match-card{
+    display:flex;
+    gap:20px;
+    align-items:center;
+    background:rgba(22,27,34,0.9);
+    padding:18px;
+    border-radius:22px;
+    margin:18px auto;
+    max-width:900px;
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(0,0,0,0.35);
+    transition:0.2s ease;
+}
+
+.match-card:hover{
+    transform:scale(1.02);
+}
+
+.match-image{
+    width:230px;
+    height:160px;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+.match-text{
+    text-align:left;
+    flex:1;
+}
+
+.match-text h2{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.match-text p{
+    font-size:17px;
+    line-height:1.5;
+}
+
+.match-city{
+    color:#d6d6f5;
+}
+
+.mini-badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+}
+
+.mini-badges span{
+    background:rgba(124,58,237,0.35);
+    padding:7px 12px;
+    border-radius:999px;
+    font-size:14px;
+}
 </script>
 
 </body>
