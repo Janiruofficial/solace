@@ -499,7 +499,7 @@ window.showPlaceDetails = function(place) {
             </div>
 
            ${window.currentUser ? `<button onclick="savePlace('${place.name.replaceAll("'", "\\'")}')">❤️ Save Place</button>` : ""}
-<button onclick="sharePlace('${place.name.replaceAll("'", "\\'")}')">
+<button onclick="window.sharePlace('${place.name.replaceAll("'", "\\'")}')">
     📤 Share This Place
 </button>
 <button onclick="showAllPlaces()">Back to All Places</button>
