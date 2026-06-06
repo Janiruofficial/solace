@@ -133,16 +133,27 @@ textarea{
     font-size:18px;
 }
 button{
-    margin-top:20px;
-    padding:15px 30px;
-    border:none;
-    border-radius:10px;
-    background:#7c3aed;
+    background:linear-gradient(135deg, rgba(124,58,237,0.95), rgba(79,70,229,0.95));
     color:white;
-    font-size:18px;
+    border:1px solid rgba(255,255,255,0.18);
+    padding:13px 22px;
+    margin:8px 6px;
+    border-radius:16px;
+    font-size:15px;
+    font-weight:600;
     cursor:pointer;
-    img{
-    margin-bottom:20px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.28);
+    backdrop-filter:blur(10px);
+    transition:all 0.2s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(0,0,0,0.35);
+}
+
+button:active{
+    transform:scale(0.98);
 }
     }
     .match-button{
@@ -158,6 +169,10 @@ button{
     cursor:pointer;
     text-align:center;
     box-shadow:0 0 18px rgba(0,0,0,0.35);
+}
+    .social-button{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
 }
 
 .match-button:hover{
@@ -274,12 +289,9 @@ Discover places that match your mood, not the crowd.
 <button onclick="logoutUser()">Logout</button>
 <button onclick="showSavedPlaces()">❤️ My Saved Places</button>
     <button onclick="showRecentlyViewed()">🕘 Recently Viewed</button>
-<button onclick="window.open('https://www.linkedin.com/company/findsolaceai/', '_blank')">
-    🔗 Solace LinkedIn
-</button>
-    <button onclick="window.open('https://www.instagram.com/find.solace.ai?igsh=MWt1cGxzM3J1MTd4OQ==', '_blank')">
-    📸 Solace Instagram
-</button>
+<button class="social-button" onclick="window.open('https://www.linkedin.com/company/findsolaceai/', '_blank')">🔗 Solace LinkedIn</button>
+
+<button class="social-button" onclick="window.open('https://www.instagram.com/find.solace.ai?igsh=MWt1cGxzM3J1MTd4OQ==', '_blank')">📸 Solace Instagram</button>
 <p id="userInfo"></p>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
 Your Matches
