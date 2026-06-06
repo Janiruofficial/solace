@@ -391,8 +391,7 @@ function showPlaceDetails(place) {
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 const firebaseConfig = {
   apiKey: "AIzaSyCw_Ro5WrZ94vnbvLeHU4ZhzLDspqz0nLY",
   authDomain: "solace-d6976.firebaseapp.com",
@@ -405,9 +404,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+    getRedirectResult(auth);
 
 window.signInWithGoogle = function() {
-  signInWithPopup(auth, provider);
+  signInWithRedirect(auth, provider);
 };
 
 window.logoutUser = function() {
