@@ -397,7 +397,7 @@ function showPlaceDetails(place) {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     const firebaseConfig = {
   apiKey: "AIzaSyCw_Ro5WrZ94vnbvleHU4ZhzLDspqz0nLY",
   authDomain: "solace-d6976.firebaseapp.com",
@@ -492,7 +492,6 @@ onAuthStateChanged(auth, (user) => {
       const place = allPlaces.find(p => p.name === savedPlaceName);
 
       if (place) {
-        html += `
         html += `
 <div style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;">
 
