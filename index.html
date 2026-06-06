@@ -352,7 +352,7 @@ document.getElementById("results").innerHTML = html;
 }
 
 function showPlaceDetails(place) {
-    saveRecentlyViewed(place.name);
+   window.saveRecentlyViewed(place.name);
     let html = `
         <div class="place-detail-card">
 
@@ -496,18 +496,17 @@ window.showPlaceDetailsBySavedName = async function(placeName) {
     showPlaceDetails(place);
   }
 };
-    function saveRecentlyViewed(placeName) {
+  window.saveRecentlyViewed = function(placeName) {
     let recent = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
 
     recent = recent.filter(name => name !== placeName);
     recent.unshift(placeName);
-
     recent = recent.slice(0, 5);
 
     localStorage.setItem("recentlyViewed", JSON.stringify(recent));
-}
+};
 
-async function showRecentlyViewed() {
+window.showRecentlyViewed = async function() {
     const recent = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
 
     const response = await fetch("places.json");
@@ -534,7 +533,7 @@ async function showRecentlyViewed() {
     }
 
     document.getElementById("results").innerHTML = html;
-}
+};
 </script>
 
 </body>
