@@ -435,40 +435,39 @@ onAuthStateChanged(auth, (user) => {
     userInfo.innerHTML = "";
   }
 });
-    window.savePlace = async function(placeName) {
+   window.savePlace = async function(placeName) {
   if (!window.currentUser) {
     alert("Please sign in with Google first.");
     return;
   }
-        window.removeSavedPlace = async function(placeName) {
 
-  if (!window.currentUser) return;
+  const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
+
+  await setDoc(
+    doc(db, "users", window.currentUser.uid, "savedPlaces", safePlaceId),
+    {
+      placeName: placeName,
+      savedAt: serverTimestamp()
+    }
+  );
+
+  alert(`${placeName} saved 🌙`);
+};
+
+window.removeSavedPlace = async function(placeName) {
+  if (!window.currentUser) {
+    alert("Please sign in with Google first.");
+    return;
+  }
 
   const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
 
   await deleteDoc(
-    doc(
-      db,
-      "users",
-      window.currentUser.uid,
-      "savedPlaces",
-      safePlaceId
-    )
+    doc(db, "users", window.currentUser.uid, "savedPlaces", safePlaceId)
   );
 
   alert(`${placeName} removed`);
-
   showSavedPlaces();
-};
-
-  const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
-
-  await setDoc(doc(db, "users", window.currentUser.uid, "savedPlaces", safePlaceId), {
-    placeName: placeName,
-    savedAt: serverTimestamp()
-  });
-
-  alert(`${placeName} saved 🌙`);
 };
     window.showSavedPlaces = async function() {
   if (!window.currentUser) {
@@ -502,7 +501,7 @@ onAuthStateChanged(auth, (user) => {
     </div>
 
     <button
-      onclick="removeSavedPlace('${place.name.replaceAll("'", "\\'")}')"
+     onclick="event.stopPropagation(); removeSavedPlace('${place.name.replaceAll("'", "\\'")}')"
       style="margin-top:10px;background:#c0392b;">
       ❌ Remove
     </button>
