@@ -350,14 +350,14 @@ document.getElementById("results").innerHTML = html;
 
     document.getElementById("results").innerHTML = html;
 }
-        async function showPlaceDetailsByIndex(index) {
+       window.showPlaceDetailsByIndex = async function(index) {
     const response = await fetch("places.json");
     const places = await response.json();
 
     showPlaceDetails(places[index]);
 }
 
-function showPlaceDetails(place) {
+window.showPlaceDetails = function(place) {
    window.saveRecentlyViewed(place.name);
     let html = `
         <div class="place-detail-card">
@@ -528,7 +528,7 @@ window.showPlaceDetailsBySavedName = async function(placeName) {
   const place = places.find(p => p.name === placeName);
 
   if (place) {
-    showPlaceDetails(place);
+    window.showPlaceDetails(place);
   }
 };
   window.saveRecentlyViewed = function(placeName) {
@@ -569,31 +569,34 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
-   .match-button{
-   display:block;
-    width:90%;
-    max-width:850px;
-    margin:16px auto;
-    padding:14px;
-    background:rgba(22,27,34,0.92);
+  .match-button{
+    display:block;
+    width:82%;
+    max-width:680px;
+    margin:14px auto;
+    padding:18px 22px;
+    background:rgba(22,27,34,0.88);
     border:1px solid rgba(255,255,255,0.12);
     border-radius:18px;
     color:white;
     cursor:pointer;
-    text-align:left;
+    text-align:center;
+    box-shadow:0 0 18px rgba(0,0,0,0.35);
 }
 
-
+.match-button:hover{
+    transform:scale(1.01);
+}
 
 .match-info h2{
-    font-size:22px;
-    margin:0 0 5px 0;
+    font-size:24px;
+    margin:0 0 8px 0;
 }
 
 .match-info p{
-    font-size:15px;
-    line-height:1.4;
-    margin:4px 0;
+    font-size:16px;
+    line-height:1.45;
+    margin:6px 0;
 }
 </script>
 
