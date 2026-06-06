@@ -313,25 +313,20 @@ matches = matches.slice(0, 5);
         html = "<p>No matches found yet.</p>";
     } else {
 
-       matches.forEach(place => {
+      matches.forEach(place => {
     html += `
-        <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
-             class="match-card">
+        <button onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+                class="match-button">
 
-            <img src="${place.real_image || place.mood_image}" class="match-image">
+            <img src="${place.real_image || place.mood_image}" class="match-thumb">
 
-            <div class="match-text">
+            <div class="match-info">
                 <h2>${place.name}</h2>
-                <p class="match-city">📍 ${place.city}</p>
+                <p>📍 ${place.city}</p>
                 <p>${place.description}</p>
-                <div class="mini-badges">
-                    <span>💰 ${place.budget_label}</span>
-                    <span>👥 ${place.crowd_label}</span>
-                    <span>🕒 ${place.best_time.join(", ")}</span>
-                </div>
             </div>
 
-        </div>
+        </button>
     `;
 });
     }
@@ -576,63 +571,39 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
-    .match-card{
+   .match-button{
     display:flex;
-    gap:20px;
     align-items:center;
-    background:rgba(22,27,34,0.9);
-    padding:18px;
-    border-radius:22px;
-    margin:18px auto;
-    max-width:900px;
-    cursor:pointer;
-    box-shadow:0 0 25px rgba(0,0,0,0.35);
-    transition:0.2s ease;
-}
-
-.match-card:hover{
-    transform:scale(1.02);
-}
-
-.match-image{
-    width:230px;
-    height:160px;
-    object-fit:cover;
+    gap:16px;
+    width:90%;
+    max-width:850px;
+    margin:16px auto;
+    padding:14px;
+    background:rgba(22,27,34,0.92);
+    border:1px solid rgba(255,255,255,0.12);
     border-radius:18px;
-}
-
-.match-text{
+    color:white;
+    cursor:pointer;
     text-align:left;
-    flex:1;
 }
 
-.match-text h2{
-    font-size:28px;
-    margin-bottom:5px;
+.match-thumb{
+    width:140px;
+    height:100px;
+    object-fit:cover;
+    border-radius:14px;
+    flex-shrink:0;
 }
 
-.match-text p{
-    font-size:17px;
-    line-height:1.5;
+.match-info h2{
+    font-size:22px;
+    margin:0 0 5px 0;
 }
 
-.match-city{
-    color:#d6d6f5;
-}
-
-.mini-badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:10px;
-}
-
-.mini-badges span{
-    background:rgba(124,58,237,0.35);
-    padding:7px 12px;
-    border-radius:999px;
-    font-size:14px;
-
+.match-info p{
+    font-size:15px;
+    line-height:1.4;
+    margin:4px 0;
 }
 </script>
 
