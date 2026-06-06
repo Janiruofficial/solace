@@ -116,6 +116,35 @@ button{
     margin-bottom:20px;
 }
     }
+    .match-button{
+    display:block;
+    width:82%;
+    max-width:680px;
+    margin:14px auto;
+    padding:18px 22px;
+    background:rgba(22,27,34,0.88);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;
+    color:white;
+    cursor:pointer;
+    text-align:center;
+    box-shadow:0 0 18px rgba(0,0,0,0.35);
+}
+
+.match-button:hover{
+    transform:scale(1.01);
+}
+
+.match-info h2{
+    font-size:24px;
+    margin:0 0 8px 0;
+}
+
+.match-info p{
+    font-size:16px;
+    line-height:1.45;
+    margin:6px 0;
+}
 .filters{
     margin:25px auto 10px auto;
     display:flex;
@@ -315,7 +344,7 @@ matches = matches.slice(0, 5);
 
     matches.forEach(place => {
     html += `
-        <button onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+        <button onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
                 class="match-button">
 
             <div class="match-info">
@@ -340,7 +369,7 @@ document.getElementById("results").innerHTML = html;
 
    places.forEach((place, index) => {
     html += `
-        <div onclick="showPlaceDetailsByIndex(${index})"
+        <div onclick="window.showPlaceDetailsByIndex(${index})"
              style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
             <h2>${place.name}</h2>
             <p>${place.city}</p>
@@ -354,7 +383,7 @@ document.getElementById("results").innerHTML = html;
     const response = await fetch("places.json");
     const places = await response.json();
 
-    showPlaceDetails(places[index]);
+    window.showPlaceDetails(places[index]);
 }
 
 window.showPlaceDetails = function(place) {
@@ -528,7 +557,7 @@ window.showPlaceDetailsBySavedName = async function(placeName) {
   const place = places.find(p => p.name === placeName);
 
   if (place) {
-    window.showPlaceDetails(place);
+   window.showPlaceDetails(place);
   }
 };
   window.saveRecentlyViewed = function(placeName) {
@@ -557,7 +586,7 @@ window.showRecentlyViewed = async function() {
 
             if (place) {
                 html += `
-                    <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+                    <div onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
                          style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
                         <h2>${place.name}</h2>
                         <p>${place.city}</p>
@@ -569,35 +598,7 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
-  .match-button{
-    display:block;
-    width:82%;
-    max-width:680px;
-    margin:14px auto;
-    padding:18px 22px;
-    background:rgba(22,27,34,0.88);
-    border:1px solid rgba(255,255,255,0.12);
-    border-radius:18px;
-    color:white;
-    cursor:pointer;
-    text-align:center;
-    box-shadow:0 0 18px rgba(0,0,0,0.35);
-}
-
-.match-button:hover{
-    transform:scale(1.01);
-}
-
-.match-info h2{
-    font-size:24px;
-    margin:0 0 8px 0;
-}
-
-.match-info p{
-    font-size:16px;
-    line-height:1.45;
-    margin:6px 0;
-}
+ 
 </script>
 
 </body>
