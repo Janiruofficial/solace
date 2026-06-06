@@ -24,6 +24,35 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+    .place-list-card{
+    display:block;
+    width:82%;
+    max-width:680px;
+    margin:14px auto;
+    padding:18px 22px;
+    background:rgba(22,27,34,0.88);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;
+    color:white;
+    cursor:pointer;
+    text-align:center;
+    box-shadow:0 0 18px rgba(0,0,0,0.35);
+}
+
+.place-list-card:hover{
+    transform:scale(1.01);
+}
+
+.place-list-card h2{
+    font-size:24px;
+    margin:0 0 8px 0;
+}
+
+.place-list-card p{
+    font-size:16px;
+    line-height:1.45;
+    margin:6px 0;
+}
 
 .place-title{
     font-size:34px;
@@ -403,11 +432,11 @@ document.getElementById("results").innerHTML = html;
 
    places.forEach((place, index) => {
     html += `
-        <div onclick="window.showPlaceDetailsByIndex(${index})"
-             style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
-            <h2>${place.name}</h2>
-            <p>${place.city}</p>
-        </div>
+       <div onclick="window.showPlaceDetailsByIndex(${index})"
+     class="place-list-card">
+    <h2>${place.name}</h2>
+    <p>📍 ${place.city}</p>
+</div>
     `;
 });
 
@@ -561,10 +590,9 @@ window.removeSavedPlace = async function(placeName) {
 
       if (place) {
         html += `
-<div style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;">
+<div class="place-list-card">
 
-    <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
-         style="cursor:pointer;">
+    <div onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')">
         <h2>${place.name}</h2>
         <p>${place.city}</p>
     </div>
@@ -621,7 +649,7 @@ window.showRecentlyViewed = async function() {
             if (place) {
                 html += `
                     <div onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
-                         style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
+     class="place-list-card">
                         <h2>${place.name}</h2>
                         <p>${place.city}</p>
                     </div>
