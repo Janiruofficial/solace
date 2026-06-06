@@ -313,12 +313,10 @@ matches = matches.slice(0, 5);
         html = "<p>No matches found yet.</p>";
     } else {
 
-      matches.forEach(place => {
+    matches.forEach(place => {
     html += `
         <button onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
                 class="match-button">
-
-            <img src="${place.real_image || place.mood_image}" class="match-thumb">
 
             <div class="match-info">
                 <h2>${place.name}</h2>
@@ -572,9 +570,7 @@ window.showRecentlyViewed = async function() {
     document.getElementById("results").innerHTML = html;
 };
    .match-button{
-    display:flex;
-    align-items:center;
-    gap:16px;
+   display:block;
     width:90%;
     max-width:850px;
     margin:16px auto;
@@ -587,13 +583,7 @@ window.showRecentlyViewed = async function() {
     text-align:left;
 }
 
-.match-thumb{
-    width:140px;
-    height:100px;
-    object-fit:cover;
-    border-radius:14px;
-    flex-shrink:0;
-}
+
 
 .match-info h2{
     font-size:22px;
