@@ -268,7 +268,13 @@ document.getElementById("results").innerHTML = html;
 
     places.forEach(place => {
         html += `
-            <div onclick='showPlaceDetails(${JSON.stringify(place)})'
+           <div onclick="showPlaceDetailsByIndex(${places.indexOf(place)})"
+           async function showPlaceDetailsByIndex(index) {
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    showPlaceDetails(places[index]);
+}
                  style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
                 <h2>${place.name}</h2>
                 <p>${place.city}</p>
