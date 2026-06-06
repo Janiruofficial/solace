@@ -286,40 +286,98 @@ document.getElementById("results").innerHTML = html;
 }
 
 function showPlaceDetails(place) {
-  let html = `
-<div style="background:#161b22;padding:25px;border-radius:18px;margin:20px auto;max-width:750px;">
+    let html = `
+        <div class="place-detail-card">
 
-<h3>🌙 How It Feels</h3>
+            <h2 class="place-title">${place.name}</h2>
+            <p class="place-city">📍 ${place.city}</p>
 
-<img src="${place.mood_image}"
-     style="width:100%;border-radius:18px;margin-bottom:20px;">
+            <h3>🌙 How It Feels</h3>
+            <img src="${place.mood_image}" class="place-image">
 
-<h3>📍 Real Place</h3>
+            <h3>📍 Real Place</h3>
+            <img src="${place.real_image}" class="place-image">
 
-<img src="${place.real_image}"
-     style="width:100%;border-radius:18px;margin-bottom:20px;">
+            <p class="place-description">${place.description}</p>
 
-<h2>${place.name}</h2>
+            <div class="badges">
+                <span>💰 ${place.budget_label}</span>
+                <span>👥 ${place.crowd_label}</span>
+                <span>🕒 ${place.best_time.join(", ")}</span>
+            </div>
 
-<p><strong>City:</strong> ${place.city}</p>
+            <div class="section">
+                <strong>Moods</strong>
+                <p>${place.moods.join(" • ")}</p>
+            </div>
 
-<p>${place.description}</p>
+            <div class="section">
+                <strong>Aesthetics</strong>
+                <p>${place.aesthetics.join(" • ")}</p>
+            </div>
 
-<p><strong>Budget:</strong> ${place.budget_label}</p>
+            <button onclick="showAllPlaces()">Back to All Places</button>
+        </div>
+    `;
 
-<p><strong>Crowd:</strong> ${place.crowd_label}</p>
-
-<p><strong>Best time:</strong> ${place.best_time.join(", ")}</p>
-
-<p><strong>Moods:</strong> ${place.moods.join(", ")}</p>
-
-<p><strong>Aesthetics:</strong> ${place.aesthetics.join(", ")}</p>
-
-<button onclick="showAllPlaces()">Back to All Places</button>
-
-</div>
-`;
     document.getElementById("results").innerHTML = html;
+}
+        .place-detail-card{
+    background:rgba(22,27,34,0.88);
+    padding:28px;
+    border-radius:24px;
+    margin:25px auto;
+    max-width:850px;
+    box-shadow:0 0 35px rgba(0,0,0,0.45);
+    backdrop-filter:blur(12px);
+}
+
+.place-title{
+    font-size:34px;
+    margin-bottom:5px;
+}
+
+.place-city{
+    font-size:20px;
+    color:#d6d6f5;
+    margin-bottom:25px;
+}
+
+.place-image{
+    width:100%;
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.place-description{
+    font-size:21px;
+    line-height:1.6;
+    color:#f5f5f5;
+    max-width:760px;
+    margin:20px auto;
+}
+
+.badges{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:25px 0;
+}
+
+.badges span{
+    background:rgba(124,58,237,0.35);
+    border:1px solid rgba(255,255,255,0.15);
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:16px;
+}
+
+.section{
+    background:rgba(255,255,255,0.06);
+    padding:16px;
+    border-radius:16px;
+    margin:15px auto;
 }
 </script>
 </body>
