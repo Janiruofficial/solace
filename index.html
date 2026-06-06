@@ -499,7 +499,9 @@ window.showPlaceDetails = function(place) {
             </div>
 
            ${window.currentUser ? `<button onclick="savePlace('${place.name.replaceAll("'", "\\'")}')">❤️ Save Place</button>` : ""}
-
+<button onclick="sharePlace('${place.name.replaceAll("'", "\\'")}')">
+    📤 Share This Place
+</button>
 <button onclick="showAllPlaces()">Back to All Places</button>
         </div>
     `;
@@ -555,7 +557,31 @@ onAuthStateChanged(auth, (user) => {
     alert("Please sign in with Google first.");
     return;
   }
+window.sharePlace = async function(placeName) {
 
+    const shareText =
+        `🌙 Check out "${placeName}" on Solace AI\n\n` +
+        `Discover places that match your mood.\n\n` +
+        window.location.href;
+
+    if (navigator.share) {
+
+        try {
+            await navigator.share({
+                title: placeName,
+                text: shareText
+            });
+        } catch(err) {
+            console.log(err);
+        }
+
+    } else {
+
+        navigator.clipboard.writeText(shareText);
+
+        alert("📋 Link copied to clipboard!");
+    }
+};
   const safePlaceId = placeName.replaceAll("/", "-").replaceAll("'", "");
 
   await setDoc(
