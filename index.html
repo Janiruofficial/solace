@@ -214,6 +214,7 @@ Discover places that match your mood, not the crowd.
 
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
 <button onclick="logoutUser()">Logout</button>
+<button onclick="showSavedPlaces()">❤️ My Saved Places</button>
 
 <p id="userInfo"></p>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
@@ -394,7 +395,7 @@ function showPlaceDetails(place) {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-   import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     const firebaseConfig = {
   apiKey: "AIzaSyCw_Ro5WrZ94vnbvleHU4ZhzLDspqz0nLY",
   authDomain: "solace-d6976.firebaseapp.com",
@@ -446,6 +447,52 @@ onAuthStateChanged(auth, (user) => {
   });
 
   alert(`${placeName} saved 🌙`);
+};
+    window.showSavedPlaces = async function() {
+  if (!window.currentUser) {
+    alert("Please sign in with Google first.");
+    return;
+  }
+
+  const savedRef = collection(db, "users", window.currentUser.uid, "savedPlaces");
+  const snapshot = await getDocs(savedRef);
+
+  const response = await fetch("places.json");
+  const allPlaces = await response.json();
+
+  let html = "<h2>❤️ My Saved Places</h2>";
+
+  if (snapshot.empty) {
+    html += "<p>You have not saved any places yet.</p>";
+  } else {
+    snapshot.forEach((docSnap) => {
+      const savedPlaceName = docSnap.data().placeName;
+      const place = allPlaces.find(p => p.name === savedPlaceName);
+
+      if (place) {
+        html += `
+          <div onclick="showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+               style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
+            <h2>${place.name}</h2>
+            <p>${place.city}</p>
+          </div>
+        `;
+      }
+    });
+  }
+
+  document.getElementById("results").innerHTML = html;
+};
+
+window.showPlaceDetailsBySavedName = async function(placeName) {
+  const response = await fetch("places.json");
+  const places = await response.json();
+
+  const place = places.find(p => p.name === placeName);
+
+  if (place) {
+    showPlaceDetails(place);
+  }
 };
 </script>
 
