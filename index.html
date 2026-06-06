@@ -266,23 +266,23 @@ document.getElementById("results").innerHTML = html;
 
     let html = "<h2>All Places</h2>";
 
-    places.forEach(place => {
-        html += `
-           <div onclick="showPlaceDetailsByIndex(${places.indexOf(place)})"
-           async function showPlaceDetailsByIndex(index) {
+   places.forEach((place, index) => {
+    html += `
+        <div onclick="showPlaceDetailsByIndex(${index})"
+             style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
+            <h2>${place.name}</h2>
+            <p>${place.city}</p>
+        </div>
+    `;
+});
+
+    document.getElementById("results").innerHTML = html;
+}
+        async function showPlaceDetailsByIndex(index) {
     const response = await fetch("places.json");
     const places = await response.json();
 
     showPlaceDetails(places[index]);
-}
-                 style="background:#161b22;padding:18px;border-radius:15px;margin:15px auto;max-width:700px;cursor:pointer;">
-                <h2>${place.name}</h2>
-                <p>${place.city}</p>
-            </div>
-        `;
-    });
-
-    document.getElementById("results").innerHTML = html;
 }
 
 function showPlaceDetails(place) {
