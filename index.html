@@ -271,6 +271,13 @@ const aestheticFilter = document.getElementById("aestheticFilter").value.toLower
 
 places.forEach(place => {
     let score = 0;
+    if (userText.includes(place.name.toLowerCase())) {
+    score += 10;
+}
+
+if (userText.includes(place.city.toLowerCase())) {
+    score += 6;
+}
 
     const searchableText = `
         ${place.name}
@@ -285,15 +292,42 @@ places.forEach(place => {
         ${place.best_time.join(" ")}
     `.toLowerCase();
 
-    const userWords = userText
-        .split(" ")
-        .map(word => word.trim())
-        .filter(word => word.length > 2);
+  const moodMap = {
+    "burnt": ["peaceful", "calm", "healing", "quiet", "relaxed"],
+    "burnout": ["peaceful", "calm", "healing", "quiet", "relaxed"],
+    "stress": ["peaceful", "calm", "relaxing", "quiet", "nature"],
+    "stressed": ["peaceful", "calm", "relaxing", "quiet", "nature"],
+    "sad": ["healing", "peaceful", "reflective", "quiet"],
+    "lonely": ["reflective", "peaceful", "solo", "quiet"],
+    "alone": ["solo", "private", "quiet", "secluded"],
+    "peace": ["peaceful", "calm", "quiet"],
+    "quiet": ["quiet", "peaceful", "low", "uncrowded"],
+    "escape": ["escape", "free", "secluded", "nature"],
+    "free": ["free", "open", "wild", "nature"],
+    "inspired": ["inspired", "cinematic", "viewpoint", "creative"],
+    "luxury": ["luxury", "modern", "premium", "city"],
+    "city": ["city", "urban", "modern", "skyline"],
+    "nature": ["nature", "green", "forest", "mountain", "beach"],
+    "beach": ["beach", "ocean", "sea", "waves"],
+    "mountain": ["mountain", "misty", "cool", "viewpoint"]
+};
 
+let expandedText = userText;
+
+Object.keys(moodMap).forEach(key => {
+    if (userText.includes(key)) {
+        expandedText += " " + moodMap[key].join(" ");
+    }
+});
+
+const userWords = expandedText
+    .split(" ")
+    .map(word => word.trim())
+    .filter(word => word.length > 2);
     userWords.forEach(word => {
         if (searchableText.includes(word)) {
-            score += 1;
-        }
+    score += 2;
+}
     });
 
     if (budgetFilter !== "" && place.budget <= Number(budgetFilter)) {
