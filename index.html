@@ -209,6 +209,13 @@ Discover places that match your mood, not the crowd.
 
 <button onclick="findPlace()">Find My Place</button>
 <button onclick="showAllPlaces()">All Places</button>
+
+<br><br>
+
+<button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
+<button onclick="logoutUser()">Logout</button>
+
+<p id="userInfo"></p>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
 Your Matches
 </h2>
@@ -381,5 +388,43 @@ function showPlaceDetails(place) {
 }
     
 </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCw_Ro5WrZ94vnbvLeHU4ZhzLDspqz0nLY",
+  authDomain: "solace-d6976.firebaseapp.com",
+  projectId: "solace-d6976",
+  storageBucket: "solace-d6976.firebasestorage.app",
+  messagingSenderId: "956909521917",
+  appId: "1:956909521917:web:cef645d3f690c893b02794"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+window.signInWithGoogle = function() {
+  signInWithPopup(auth, provider);
+};
+
+window.logoutUser = function() {
+  signOut(auth);
+};
+
+onAuthStateChanged(auth, (user) => {
+  const userInfo = document.getElementById("userInfo");
+
+  if (user) {
+    userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
+  } else {
+    userInfo.innerHTML = "";
+  }
+});
+</script>
+
 </body>
+</html>
 </html>
