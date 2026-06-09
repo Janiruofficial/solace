@@ -328,7 +328,7 @@ Discover places that match your mood, not the crowd.
 <button onclick="showAllPlaces()">All Places</button>
 
 <br><br>
-${place.map_link ? `<button onclick="window.open('${place.map_link}', '_blank')">📍 Open in Google Maps</button>` : ""}
+
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
 <button onclick="logoutUser()">Logout</button>
 <button onclick="showSavedPlaces()">❤️ My Saved Places</button>
@@ -543,7 +543,9 @@ window.showPlaceDetails = function(place) {
             </div>
 
            ${window.currentUser ? `<button onclick="savePlace('${place.name.replaceAll("'", "\\'")}')">❤️ Save Place</button>` : ""}
+           ${place.map_link ? `<button onclick="window.open('${place.map_link}', '_blank')">📍 Open in Google Maps</button>` : ""}
 <button onclick="window.sharePlace('${place.name.replaceAll("'", "\\'")}')">
+
     📋 Copy Share Text
 </button>
 <button onclick="showAllPlaces()">Back to All Places</button>
