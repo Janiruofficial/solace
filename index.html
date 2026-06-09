@@ -24,6 +24,29 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+    .top-search{
+    position:fixed;
+    top:20px;
+    left:20px;
+    display:flex;
+    gap:8px;
+    z-index:1000;
+}
+
+.top-search input{
+    width:170px;
+    padding:11px 14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.18);
+    background:rgba(22,27,34,0.85);
+    color:white;
+    outline:none;
+}
+
+.top-search button{
+    padding:11px 14px;
+    font-size:14px;
+}
     .place-list-card{
     display:block;
     width:82%;
@@ -277,7 +300,10 @@ Discover places that match your mood, not the crowd.
     <option value="city lights">City lights</option>
   </select>
 </div>
-
+<div class="top-search">
+  <input id="placeSearchInput" type="text" placeholder="Search place...">
+  <button onclick="searchPlaceByName()">Search</button>
+</div>
 <br>
 
 <button onclick="findPlace()">Find My Place</button>
@@ -692,6 +718,35 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
+    async function searchPlaceByName() {
+    const searchText = document.getElementById("placeSearchInput").value.toLowerCase();
+
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    const matches = places.filter(place =>
+        place.name.toLowerCase().includes(searchText) ||
+        place.city.toLowerCase().includes(searchText)
+    );
+
+    let html = "<h2>Search Results</h2>";
+
+    if (matches.length === 0) {
+        html += "<p>No place found.</p>";
+    } else {
+        matches.forEach(place => {
+            html += `
+                <div onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+                     class="place-list-card">
+                    <h2>${place.name}</h2>
+                    <p>📍 ${place.city}</p>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
  
 </script>
 
