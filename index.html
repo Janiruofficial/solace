@@ -738,7 +738,7 @@ onAuthStateChanged(auth, (user) => {
     window.currentUser = user;
 
     if (user) {
-        userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
+        userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
 
         if (accountName) {
             accountName.textContent = user.displayName || "Solace User";
