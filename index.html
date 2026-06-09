@@ -24,44 +24,56 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
-    .top-search{
+   .top-search{
     position:fixed;
     top:20px;
     left:20px;
-    display:flex;
-    gap:8px;
     z-index:1000;
+    width:300px;
 }
 
-.top-search input{
-    width:170px;
-    padding:11px 14px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.18);
-    background:rgba(22,27,34,0.85);
-    color:white;
-    outline:none;
-}
-
-.top-search button{
-    padding:11px 14px;
-    font-size:14px;
-}
-    .place-list-card{
-    display:block;
-    width:82%;
-    max-width:680px;
-    margin:14px auto;
-    padding:18px 22px;
-    background:rgba(22,27,34,0.88);
-    border:1px solid rgba(255,255,255,0.12);
+#placeSearchInput{
+    width:100%;
+    padding:14px 18px;
     border-radius:18px;
+    border:1px solid rgba(255,255,255,0.15);
+    background:rgba(15,20,30,0.85);
+    backdrop-filter:blur(12px);
+    color:white;
+    font-size:15px;
+    outline:none;
+    box-sizing:border-box;
+}
+
+#placeSearchInput:focus{
+    border-color:rgba(170,140,255,0.6);
+}
+
+#searchSuggestions{
+    margin-top:8px;
+    border-radius:18px;
+    overflow:hidden;
+    backdrop-filter:blur(15px);
+}
+
+.search-item{
+    padding:14px 18px;
+    background:rgba(22,27,34,0.88);
     color:white;
     cursor:pointer;
-    text-align:center;
-    box-shadow:0 0 18px rgba(0,0,0,0.35);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    transition:0.25s;
 }
 
+.search-item:hover{
+    background:rgba(90,70,170,0.45);
+    transform:translateX(4px);
+}
+
+.search-city{
+    opacity:0.7;
+    font-size:13px;
+}
 .place-list-card:hover{
     transform:scale(1.01);
 }
@@ -301,8 +313,14 @@ Discover places that match your mood, not the crowd.
   </select>
 </div>
 <div class="top-search">
-  <input id="placeSearchInput" type="text" placeholder="Search place...">
-  <button onclick="window.searchPlaceByName()">Search</button>
+    <input
+        type="text"
+        id="placeSearchInput"
+        placeholder="🔍 Search places..."
+        oninput="searchPlacesLive()"
+    >
+
+    <div id="searchSuggestions"></div>
 </div>
 <br>
 
@@ -747,6 +765,52 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 }
+    window.searchPlacesLive = async function() {
+
+    const text =
+        document.getElementById("placeSearchInput")
+        .value
+        .toLowerCase();
+
+    const suggestionBox =
+        document.getElementById("searchSuggestions");
+
+    if(text.length < 2){
+        suggestionBox.innerHTML = "";
+        return;
+    }
+
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    const matches = places.filter(place =>
+        place.name.toLowerCase().includes(text)
+    );
+
+    let html = "";
+
+    matches.slice(0,8).forEach(place => {
+
+        html += `
+        <div class="search-item"
+             onclick="openSearchPlace('${place.name.replaceAll("'", "\\'")}')">
+
+            <strong>${place.name}</strong>
+            <div class="search-city">${place.city}</div>
+
+        </div>
+        `;
+    });
+
+    suggestionBox.innerHTML = html;
+};window.openSearchPlace = function(placeName){
+
+    document.getElementById("searchSuggestions").innerHTML = "";
+
+    document.getElementById("placeSearchInput").value = "";
+
+    showPlaceDetailsBySavedName(placeName);
+};
  
 </script>
 
