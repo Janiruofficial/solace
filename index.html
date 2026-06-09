@@ -732,29 +732,36 @@ window.logoutUser = function() {
 
 onAuthStateChanged(auth, (user) => {
     const userInfo = document.getElementById("userInfo");
-    const accountName = document.getElementById("accountName");
-    const accountEmail = document.getElementById("accountEmail");
 
     window.currentUser = user;
 
-   if (user) {
-    userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
+    if (user) {
+        userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
 
-    document.querySelector("#accountName").innerText =
-        user.displayName || "Solace User";
+        const accountName = document.getElementById("accountName");
+        const accountEmail = document.getElementById("accountEmail");
 
-    document.querySelector("#accountEmail").innerText =
-        user.email || "";
+        if (accountName) {
+            accountName.innerText = user.displayName || "Solace User";
+        }
 
-} else {
-    userInfo.innerHTML = "";
+        if (accountEmail) {
+            accountEmail.innerText = user.email || "";
+        }
 
-    document.querySelector("#accountName").innerText =
-        "Guest";
+    } else {
+        userInfo.innerHTML = "";
 
-    document.querySelector("#accountEmail").innerText =
-        "Not signed in";
-}
+        const accountName = document.getElementById("accountName");
+        const accountEmail = document.getElementById("accountEmail");
+
+        if (accountName) {
+            accountName.innerText = "Guest";
+        }
+
+        if (accountEmail) {
+            accountEmail.innerText = "Not signed in";
+        }
     }
 });
    window.savePlace = async function(placeName) {
