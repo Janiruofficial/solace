@@ -737,28 +737,24 @@ onAuthStateChanged(auth, (user) => {
 
     window.currentUser = user;
 
-    if (user) {
-       alert("Signed in as: " + user.email);
-        userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
+   if (user) {
+    userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
 
-        if (accountName) {
-            accountName.textContent = user.displayName || "Solace User";
-        }
+    document.querySelector("#accountName").innerText =
+        user.displayName || "Solace User";
 
-        if (accountEmail) {
-            accountEmail.textContent = user.email || "";
-        }
+    document.querySelector("#accountEmail").innerText =
+        user.email || "";
 
-    } else {
-        userInfo.innerHTML = "";
+} else {
+    userInfo.innerHTML = "";
 
-        if (accountName) {
-            accountName.textContent = "Guest";
-        }
+    document.querySelector("#accountName").innerText =
+        "Guest";
 
-        if (accountEmail) {
-            accountEmail.textContent = "Not signed in";
-        }
+    document.querySelector("#accountEmail").innerText =
+        "Not signed in";
+}
     }
 });
    window.savePlace = async function(placeName) {
