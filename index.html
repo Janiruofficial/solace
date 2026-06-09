@@ -24,6 +24,31 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+    .account-dropdown{
+    position:absolute;
+    top:95px;
+    left:20px;
+    z-index:1000;
+}
+
+.account-btn{
+    width:220px;
+}
+
+.account-menu{
+    display:none;
+    margin-top:8px;
+    background:rgba(15,15,25,0.92);
+    border-radius:16px;
+    padding:10px;
+    backdrop-filter:blur(10px);
+}
+
+.account-menu button{
+    display:block;
+    width:100%;
+    margin:6px 0;
+}
     .about-card{
     max-width:850px;
     margin:35px auto;
@@ -399,6 +424,29 @@ Discover places that match your mood, not the crowd.
 
     <div id="searchSuggestions"></div>
 </div>
+    <div class="account-dropdown">
+
+    <button onclick="toggleAccountMenu()" class="account-btn">
+        👤 My Account ▼
+    </button>
+
+    <div id="accountMenu" class="account-menu">
+
+        <button onclick="showSavedPlaces()">
+            💗 Saved Places
+        </button>
+
+        <button onclick="showRecentlyViewed()">
+            🕘 Recently Viewed
+        </button>
+
+        <button onclick="logoutUser()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
 <br>
 
 <button onclick="findPlace()">Find My Place</button>
@@ -411,11 +459,6 @@ Discover places that match your mood, not the crowd.
 
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
 
-<button onclick="logoutUser()">Logout</button>
-
-<button onclick="showSavedPlaces()">💗 My Saved Places</button>
-
-<button onclick="showRecentlyViewed()">🕘 Recently Viewed</button>
 
 <button onclick="window.open('https://www.linkedin.com/company/findsolaceai/', '_blank')">
 🔗 Solace LinkedIn
@@ -989,6 +1032,17 @@ document.getElementById("results").innerHTML = `
 
 `;
 
+};
+    window.toggleAccountMenu = function(){
+
+    const menu =
+        document.getElementById("accountMenu");
+
+    if(menu.style.display === "block"){
+        menu.style.display = "none";
+    }else{
+        menu.style.display = "block";
+    }
 };
 </script>
 
