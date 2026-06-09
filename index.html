@@ -738,6 +738,7 @@ onAuthStateChanged(auth, (user) => {
     window.currentUser = user;
 
     if (user) {
+       alert("Signed in as: " + user.email);
         userInfo.innerHTML = `👤 Welcome, ${user.displayName || "Solace User"}`;
 
         if (accountName) {
