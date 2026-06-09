@@ -57,7 +57,8 @@
     "aesthetic_score": 8,
     "privacy_score": 9,
     "mood_image": "rekawa_mood.jpg",
-"real_image": "rekawa_real.jpg"
+"real_image": "rekawa_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Rekawa+Beach+Tangalle+Sri+Lanka"
   },
   {
     "name": "Ussangoda",
@@ -76,7 +77,8 @@
     "aesthetic_score": 10,
     "privacy_score": 8,
     "mood_image": "ussangoda_mood.jpg",
-"real_image": "ussangoda_real.jpg"
+"real_image": "ussangoda_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Ussangoda+National+Park+Hambantota+Sri+Lanka"
   },
   {
     "name": "Galle Fort",
@@ -95,7 +97,8 @@
     "aesthetic_score": 9,
     "privacy_score": 4,
     "mood_image": "gallefort_mood.jpg",
-"real_image": "gallefort_real.jpg"
+"real_image": "gallefort_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Galle+Fort+Sri+Lanka"
   },
   {
     "name": "Haputale",
@@ -114,7 +117,8 @@
     "aesthetic_score": 9,
     "privacy_score": 8,
     "mood_image": "haputale_mood.jpg",
-"real_image": "haputale_real.jpg"
+"real_image": "haputale_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Haputale+Sri+Lanka"
   },
   {
     "name": "Lipton's Seat",
