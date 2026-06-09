@@ -24,6 +24,27 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+     .sparkle{
+    position:fixed;
+    font-size:24px;
+    pointer-events:none;
+    z-index:9999;
+    animation:sparkleFloat 1.2s ease-out forwards;
+}
+
+@keyframes sparkleFloat{
+
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(0.5);
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-120px) scale(1.5);
+    }
+}
+
    .top-search{
     position:fixed;
     top:20px;
@@ -115,26 +136,7 @@ body{
 }
 
 }
-    .sparkle{
-    position:fixed;
-    font-size:24px;
-    pointer-events:none;
-    z-index:9999;
-    animation:sparkleFloat 1.2s ease-out forwards;
-}
-
-@keyframes sparkleFloat{
-
-    0%{
-        opacity:1;
-        transform:translateY(0) scale(0.5);
-    }
-
-    100%{
-        opacity:0;
-        transform:translateY(-120px) scale(1.5);
-    }
-}
+  
 
 .badges{
     display:flex;
@@ -874,28 +876,21 @@ window.showRecentlyViewed = async function() {
         window.showPlaceDetailsBySavedName(randomPlace.name);
     }, 1200);
 };
- window.createSparkles = function(){
-
-    for(let i=0;i<25;i++){
-
+window.createSparkles = function(){
+    for(let i = 0; i < 30; i++){
         const sparkle = document.createElement("div");
 
         sparkle.className = "sparkle";
+        sparkle.innerHTML = ["✨","🌙","⭐"][Math.floor(Math.random() * 3)];
 
-        sparkle.innerHTML =
-            ["✨","🌙","⭐"][Math.floor(Math.random()*3)];
-
-        sparkle.style.left =
-            Math.random()*window.innerWidth + "px";
-
-        sparkle.style.top =
-            Math.random()*window.innerHeight + "px";
+        sparkle.style.left = Math.random() * 100 + "vw";
+        sparkle.style.top = Math.random() * 100 + "vh";
 
         document.body.appendChild(sparkle);
 
         setTimeout(() => {
             sparkle.remove();
-        },1200);
+        }, 1300);
     }
 };
     window.showAboutPage = function(){
