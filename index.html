@@ -743,11 +743,28 @@ onAuthStateChanged(auth, (user) => {
   const userInfo = document.getElementById("userInfo");
   window.currentUser = user;
 
-  if (user) {
+ if (user) {
+    window.currentUser = user;
+
     userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
-  } else {
+
+    document.getElementById("accountName").textContent =
+        user.displayName || "Solace User";
+
+    document.getElementById("accountEmail").textContent =
+        user.email || "";
+
+} else {
+    window.currentUser = null;
+
     userInfo.innerHTML = "";
-  }
+
+    document.getElementById("accountName").textContent =
+        "Guest";
+
+    document.getElementById("accountEmail").textContent =
+        "Not signed in";
+}
 });
    window.savePlace = async function(placeName) {
   if (!window.currentUser) {
