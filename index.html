@@ -731,31 +731,34 @@ window.logoutUser = function() {
 };
 
 onAuthStateChanged(auth, (user) => {
-  const userInfo = document.getElementById("userInfo");
-  window.currentUser = user;
+    const userInfo = document.getElementById("userInfo");
+    const accountName = document.getElementById("accountName");
+    const accountEmail = document.getElementById("accountEmail");
 
- if (user) {
-   
+    window.currentUser = user;
 
-    userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
+    if (user) {
+        userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
 
-    document.getElementById("accountName").textContent =
-        user.displayName || "Solace User";
+        if (accountName) {
+            accountName.textContent = user.displayName || "Solace User";
+        }
 
-    document.getElementById("accountEmail").textContent =
-        user.email || "";
+        if (accountEmail) {
+            accountEmail.textContent = user.email || "";
+        }
 
-} else {
-    window.currentUser = null;
+    } else {
+        userInfo.innerHTML = "";
 
-    userInfo.innerHTML = "";
+        if (accountName) {
+            accountName.textContent = "Guest";
+        }
 
-    document.getElementById("accountName").textContent =
-        "Guest";
-
-    document.getElementById("accountEmail").textContent =
-        "Not signed in";
-}
+        if (accountEmail) {
+            accountEmail.textContent = "Not signed in";
+        }
+    }
 });
    window.savePlace = async function(placeName) {
   if (!window.currentUser) {
