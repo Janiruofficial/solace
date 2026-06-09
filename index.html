@@ -326,7 +326,7 @@ Discover places that match your mood, not the crowd.
 
 <button onclick="findPlace()">Find My Place</button>
 <button onclick="showAllPlaces()">All Places</button>
-
+<button onclick="window.surpriseMe()">✨ Surprise Me</button>
 <br><br>
 
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
@@ -812,6 +812,32 @@ window.showRecentlyViewed = async function() {
     document.getElementById("placeSearchInput").value = "";
 
     showPlaceDetailsBySavedName(placeName);
+};
+    window.surpriseMe = async function() {
+    const quotes = [
+        "The right place sometimes finds you.",
+        "Tonight feels different.",
+        "A hidden escape is waiting.",
+        "Not every journey needs a plan.",
+        "Some places choose us."
+    ];
+
+    const response = await fetch("places.json");
+    const places = await response.json();
+
+    const randomPlace = places[Math.floor(Math.random() * places.length)];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    document.getElementById("results").innerHTML = `
+        <div class="place-list-card">
+            <h2>✨ ${quote}</h2>
+            <p>Finding your Solace...</p>
+        </div>
+    `;
+
+    setTimeout(() => {
+        window.showPlaceDetailsBySavedName(randomPlace.name);
+    }, 1200);
 };
  
 </script>
