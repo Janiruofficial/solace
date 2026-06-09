@@ -1067,10 +1067,20 @@ document.getElementById("results").innerHTML = `
 `;
 
 };
-    window.toggleAccountMenu = function(){
+   window.toggleAccountMenu = function(){
 
-    const menu =
-        document.getElementById("accountMenu");
+    const menu = document.getElementById("accountMenu");
+
+    const accountName = document.getElementById("accountName");
+    const accountEmail = document.getElementById("accountEmail");
+
+    if (window.currentUser) {
+        accountName.innerText = window.currentUser.displayName || "Solace User";
+        accountEmail.innerText = window.currentUser.email || "";
+    } else {
+        accountName.innerText = "Guest";
+        accountEmail.innerText = "Not signed in";
+    }
 
     if(menu.style.display === "block"){
         menu.style.display = "none";
