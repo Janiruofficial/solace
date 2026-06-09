@@ -24,6 +24,59 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+    .about-card{
+    max-width:850px;
+    margin:35px auto;
+    padding:35px;
+    background:rgba(22,27,34,0.88);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:24px;
+    box-shadow:0 0 35px rgba(0,0,0,0.45);
+    backdrop-filter:blur(14px);
+    text-align:left;
+}
+
+.about-card h2{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.about-intro{
+    text-align:center;
+    font-size:18px;
+    line-height:1.6;
+    opacity:0.95;
+    margin-bottom:28px;
+}
+
+.about-section{
+    margin:22px 0;
+    padding:18px 20px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.06);
+}
+
+.about-section h3{
+    margin-top:0;
+    font-size:22px;
+}
+
+.about-section p,
+.about-section li{
+    font-size:16px;
+    line-height:1.6;
+}
+
+.about-section ul{
+    padding-left:22px;
+}
+
+.about-footer{
+    text-align:center;
+    margin-top:28px;
+    opacity:0.75;
+}
      .sparkle{
     position:fixed;
     font-size:24px;
@@ -895,64 +948,47 @@ window.createSparkles = function(){
 };
     window.showAboutPage = function(){
 
-    document.getElementById("results").innerHTML = `
-    
-   <div class="place-list-card">
+document.getElementById("results").innerHTML = `
 
-<h2>🌙 About Solace</h2>
+<div class="about-card">
 
-<p>
-Solace is a mood-based place discovery platform designed to help people find places that match how they want to feel, not just where they want to go.
-</p>
+    <h2>🌙 About Solace</h2>
+    <p class="about-intro">
+        Solace is a mood-based place discovery platform that helps people find places based on how they want to feel — not just where they want to go.
+    </p>
 
-<h3>✨ Our Mission</h3>
+    <div class="about-section">
+        <h3>✨ Mission</h3>
+        <p>To make place discovery more personal, emotional, and meaningful by connecting people with peaceful escapes, hidden gems, inspiring views, and calming spaces.</p>
+    </div>
 
-<p>
-We believe that choosing a place should begin with emotion, not just location. Solace helps people discover peaceful escapes, hidden gems, inspiring views, and meaningful experiences based on mood, atmosphere, and personal preference.
-</p>
+    <div class="about-section">
+        <h3>💡 Why Solace Was Created</h3>
+        <p>Most platforms focus on location, ratings, and popularity. Solace was created because sometimes people do not know exactly where they want to go — they only know how they want to feel.</p>
+    </div>
 
-<h3>💡 Why Solace Was Created</h3>
+    <div class="about-section">
+        <h3>🇱🇰 Built in Sri Lanka</h3>
+        <p>Solace was proudly built in Sri Lanka and currently focuses on meaningful destinations across the island.</p>
+    </div>
 
-<p>
-Most travel and discovery platforms focus on destinations, ratings, and popularity. Solace was created with a different idea: sometimes people don't know where they want to go—they only know how they want to feel.
-</p>
+    <div class="about-section">
+        <h3>🚀 Roadmap</h3>
+        <ul>
+            <li>Expanded destination database</li>
+            <li>Google Maps integration</li>
+            <li>Smarter AI recommendations</li>
+            <li>More mood categories</li>
+            <li>Mobile app development</li>
+        </ul>
+    </div>
 
-<p>
-Whether you're looking for peace, adventure, inspiration, solitude, or a place to recharge, Solace aims to connect emotions with real-world destinations.
-</p>
-
-<h3>🇱🇰 Built in Sri Lanka</h3>
-
-<p>
-Solace was proudly built in Sri Lanka and currently focuses on showcasing meaningful places across the island, from quiet beaches and mountain escapes to nature retreats and hidden viewpoints.
-</p>
-
-<h3>🚀 Future Roadmap</h3>
-
-<p>
-• Expanded destination database<br>
-• Google Maps integration<br>
-• Smarter AI-powered recommendations<br>
-• More mood categories and filters<br>
-• Personalized user profiles<br>
-• Community-submitted discoveries<br>
-• Mobile app development<br>
-• Global destination expansion
-</p>
-
-<h3>🌌 Vision</h3>
-
-<p>
-To become the world's most personal place discovery platform—helping people discover not just destinations, but experiences that truly match how they feel.
-</p>
-
-<p style="opacity:0.7;margin-top:25px;">
-Solace • Find places that feel right.
-</p>
+    <p class="about-footer">Solace • Find places that feel right.</p>
 
 </div>
-    
-    `;
+
+`;
+
 };
 </script>
 
