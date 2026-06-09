@@ -137,7 +137,8 @@
     "aesthetic_score": 10,
     "privacy_score": 6,
    "mood_image": "liptonsseat_mood.jpg",
-"real_image": "liptonsseat_real.jpg"
+"real_image": "liptonsseat_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Liptons+Seat+Haputale+Sri+Lanka"
   },
   {
     "name": "Ohiya",
@@ -156,7 +157,8 @@
     "aesthetic_score": 8,
     "privacy_score": 9,
 "mood_image": "ohiya_mood.jpg",
-"real_image": "ohiya_real.jpg"
+"real_image": "ohiya_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Ohiya+Sri+Lanka"
   },
   {
     "name": "Sinharaja Forest",
@@ -175,7 +177,8 @@
     "aesthetic_score": 9,
     "privacy_score": 7,
    "mood_image": "sinharaja_mood.jpg",
-"real_image": "sinharaja_real.jpg"
+"real_image": "sinharaja_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Sinharaja+Forest+Reserve+Sri+Lanka"
   },
   {
     "name": "Lotus Tower View Area",
@@ -194,6 +197,7 @@
     "aesthetic_score": 8,
     "privacy_score": 3,
     "mood_image": "lotustower_mood.jpg",
-"real_image": "lotustower_real.jpg"
+"real_image": "lotustower_real.jpg",
+    "map_link": "https://www.google.com/maps/search/?api=1&query=Lotus+Tower+Colombo+Sri+Lanka"
   }
 ]
