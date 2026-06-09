@@ -24,6 +24,19 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
+    #accountInfo{
+    text-align:center;
+    padding:12px;
+    color:white;
+}
+
+#accountName{
+    font-size:16px;
+}
+
+#accountEmail{
+    opacity:0.7;
+}
     .account-dropdown{
     position:absolute;
     top:95px;
@@ -430,22 +443,28 @@ Discover places that match your mood, not the crowd.
         👤 My Account ▼
     </button>
 
-    <div id="accountMenu" class="account-menu">
+  <div id="accountMenu" class="account-menu">
 
-        <button onclick="showSavedPlaces()">
-            💗 Saved Places
-        </button>
-
-        <button onclick="showRecentlyViewed()">
-            🕘 Recently Viewed
-        </button>
-
-        <button onclick="logoutUser()">
-            🚪 Logout
-        </button>
-
+    <div id="accountInfo">
+        <strong id="accountName">Guest</strong><br>
+        <small id="accountEmail">Not signed in</small>
     </div>
 
+    <hr>
+
+    <button onclick="showSavedPlaces()">
+        💗 Saved Places
+    </button>
+
+    <button onclick="showRecentlyViewed()">
+        🕘 Recently Viewed
+    </button>
+
+    <button onclick="logoutUser()">
+        🚪 Logout
+    </button>
+
+</div>
 </div>
 <br>
 
