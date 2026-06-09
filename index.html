@@ -442,8 +442,7 @@ Discover places that match your mood, not the crowd.
     <button onclick="toggleAccountMenu()" class="account-btn">
         👤 My Account ▼
     </button>
-
-  <div id="accountMenu" class="account-menu">
+<div id="accountMenu" class="account-menu">
 
     <div id="accountInfo">
         <strong id="accountName">Guest</strong><br>
@@ -452,20 +451,12 @@ Discover places that match your mood, not the crowd.
 
     <hr>
 
-    <button onclick="showSavedPlaces()">
-        💗 Saved Places
-    </button>
-
-    <button onclick="showRecentlyViewed()">
-        🕘 Recently Viewed
-    </button>
-
-    <button onclick="logoutUser()">
-        🚪 Logout
-    </button>
+    <button onclick="showSavedPlaces()">💗 Saved Places</button>
+    <button onclick="showRecentlyViewed()">🕘 Recently Viewed</button>
+    <button onclick="logoutUser()">🚪 Logout</button>
 
 </div>
-</div>
+    </div>
 <br>
 
 <button onclick="findPlace()">Find My Place</button>
@@ -744,7 +735,7 @@ onAuthStateChanged(auth, (user) => {
   window.currentUser = user;
 
  if (user) {
-    window.currentUser = user;
+   
 
     userInfo.innerHTML = `👤 Welcome, ${user.displayName}`;
 
