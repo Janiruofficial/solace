@@ -113,27 +113,6 @@ body{
     max-width:760px;
     margin:20px auto;
 }
-    #sideMenu{
-
-    position:fixed;
-
-    right:25px;
-
-    top:220px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-    z-index:1000;
-
-}
-
-#sideMenu button{
-
-    width:220px;
 
 }
     .sparkle{
@@ -370,9 +349,10 @@ Discover places that match your mood, not the crowd.
 <button onclick="findPlace()">Find My Place</button>
 <button onclick="showAllPlaces()">All Places</button>
 <button onclick="window.surpriseMe()">✨ Surprise Me</button>
+    <button onclick="showAboutPage()">
+ℹ️ About Solace
+</button>
 <br><br>
-
-<div id="sideMenu">
 
 <button onclick="signInWithGoogle()">🌙 Sign in with Google</button>
 
@@ -390,11 +370,7 @@ Discover places that match your mood, not the crowd.
 📸 Solace Instagram
 </button>
 
-<button onclick="showAboutPage()">
-ℹ️ About Solace
-</button>
 
-</div>
 <<h2 id="resultsTitle" style="display:none; margin-top:40px;">
 Your Matches
 </h2>
