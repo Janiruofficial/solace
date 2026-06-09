@@ -302,7 +302,7 @@ Discover places that match your mood, not the crowd.
 </div>
 <div class="top-search">
   <input id="placeSearchInput" type="text" placeholder="Search place...">
-  <button onclick="searchPlaceByName()">Search</button>
+  <button onclick="window.searchPlaceByName()">Search</button>
 </div>
 <br>
 
@@ -718,7 +718,7 @@ window.showRecentlyViewed = async function() {
 
     document.getElementById("results").innerHTML = html;
 };
-    async function searchPlaceByName() {
+    window.searchPlaceByName = async function() {
     const searchText = document.getElementById("placeSearchInput").value.toLowerCase();
 
     const response = await fetch("places.json");
@@ -743,7 +743,7 @@ window.showRecentlyViewed = async function() {
                 </div>
             `;
         });
-    }
+    };
 
     document.getElementById("results").innerHTML = html;
 }
