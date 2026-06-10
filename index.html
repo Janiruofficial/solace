@@ -24,43 +24,68 @@ body{
     box-shadow:0 0 35px rgba(0,0,0,0.45);
     backdrop-filter:blur(12px);
 }
-    #accountInfo{
+    body{
+    background-attachment:fixed;
+}
+
+.main-content{
+    max-width:850px;
+    margin:0 auto;
     text-align:center;
-    padding:12px;
-    color:white;
 }
-
-#accountName{
-    font-size:16px;
-}
-
-#accountEmail{
-    opacity:0.7;
-}
-    .account-dropdown{
-    position:absolute;
-    top:95px;
-    left:20px;
+   .account-dropdown{
+    position:fixed;
+    top:85px;
+    left:22px;
     z-index:1000;
+    width:240px;
 }
 
 .account-btn{
-    width:220px;
+    width:240px;
+    padding:12px 16px;
+    font-size:15px;
 }
 
 .account-menu{
     display:none;
-    margin-top:8px;
-    background:rgba(15,15,25,0.92);
-    border-radius:16px;
-    padding:10px;
-    backdrop-filter:blur(10px);
+    margin-top:10px;
+    padding:14px;
+    border-radius:20px;
+    background:rgba(10,15,30,0.72);
+    border:1px solid rgba(255,255,255,0.14);
+    backdrop-filter:blur(16px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.35);
+}
+
+#accountInfo{
+    text-align:left;
+    padding:8px 6px 14px;
+}
+
+#accountName{
+    font-size:15px;
+    font-weight:700;
+}
+
+#accountEmail{
+    font-size:12px;
+    opacity:0.68;
+}
+
+.account-menu hr{
+    border:none;
+    height:1px;
+    background:rgba(255,255,255,0.18);
+    margin:8px 0 12px;
 }
 
 .account-menu button{
-    display:block;
     width:100%;
     margin:6px 0;
+    padding:11px 14px;
+    font-size:14px;
+    border-radius:14px;
 }
     .about-card{
     max-width:850px;
@@ -136,25 +161,25 @@ body{
     }
 }
 
-   .top-search{
+  .top-search{
     position:fixed;
-    top:20px;
-    left:20px;
+    top:22px;
+    left:22px;
     z-index:1000;
     width:300px;
 }
 
 #placeSearchInput{
     width:100%;
-    padding:14px 18px;
+    padding:13px 17px;
     border-radius:18px;
-    border:1px solid rgba(255,255,255,0.15);
-    background:rgba(15,20,30,0.85);
-    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.14);
+    background:rgba(10,15,30,0.68);
     color:white;
-    font-size:15px;
     outline:none;
-    box-sizing:border-box;
+    backdrop-filter:blur(16px);
+    font-size:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
 #placeSearchInput:focus{
