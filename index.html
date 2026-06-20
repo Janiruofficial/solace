@@ -16,6 +16,103 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .hero-card{
+    max-width:950px;
+    margin:0 auto;
+    padding:35px 38px;
+    border-radius:34px;
+    background:rgba(8,12,28,0.42);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    box-shadow:
+        0 0 55px rgba(95,75,255,0.28),
+        inset 0 0 35px rgba(255,255,255,0.04);
+}
+
+.logo-glow{
+    width:230px;
+    border-radius:26px;
+    box-shadow:0 0 45px rgba(170,150,255,0.45);
+    margin-bottom:20px;
+}
+
+.hero-title{
+    font-size:42px;
+    line-height:1.2;
+    font-weight:800;
+    margin:14px auto 20px;
+    max-width:850px;
+    text-shadow:0 0 25px rgba(255,255,255,0.25);
+}
+
+.hero-subtitle{
+    font-size:18px;
+    opacity:0.88;
+    margin-bottom:22px;
+}
+
+.mood-pills{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px auto 25px;
+}
+
+.mood-pills span{
+    padding:10px 15px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.11);
+    border:1px solid rgba(255,255,255,0.18);
+    font-size:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.22);
+}
+
+textarea{
+    width:82%;
+    max-width:780px;
+    height:135px;
+    border-radius:26px;
+    background:rgba(8,16,32,0.58);
+    border:1px solid rgba(130,210,255,0.55);
+    box-shadow:
+        0 0 25px rgba(70,180,255,0.28),
+        inset 0 0 22px rgba(255,255,255,0.05);
+}
+
+textarea:focus{
+    outline:none;
+    border-color:rgba(180,150,255,0.9);
+    box-shadow:
+        0 0 35px rgba(160,120,255,0.45),
+        inset 0 0 25px rgba(255,255,255,0.06);
+}
+
+.action-row{
+    margin-top:22px;
+}
+
+.primary-action{
+    padding:16px 34px;
+    border-radius:999px;
+    font-size:16px;
+    background:linear-gradient(135deg,#8b5cf6,#2563eb);
+}
+
+.secondary-action{
+    background:rgba(255,255,255,0.11);
+    border-radius:999px;
+}
+
+.filters{
+    margin-top:18px;
+}
+
+select{
+    border-radius:999px;
+    background:rgba(8,14,30,0.62);
+}
     .match-card{
     display:flex;
     align-items:center;
@@ -594,14 +691,30 @@ select:hover{
 <body>
 
 
-<img src="logo.png" alt="Solace Logo" width="300">
+<div class="hero-card">
 
-<p>
-Discover places that match your mood, not the crowd.
-</p>
+    <img src="logo.png" alt="Solace Logo" class="logo-glow">
 
-<textarea id="userInput" placeholder="Describe your ideal place..."></textarea>
+    <div class="hero-title">
+        Discover places that match your mood, not the crowd.
+    </div>
 
+    <div class="hero-subtitle">
+        Tell Solace how you want to feel — peaceful, luxurious, hidden, romantic, inspired, or free.
+    </div>
+
+    <div class="mood-pills">
+        <span>🌙 Peaceful</span>
+        <span>🌊 Ocean</span>
+        <span>🏙️ Luxury</span>
+        <span>☕ Cozy</span>
+        <span>🌿 Healing</span>
+        <span>✨ Hidden Gems</span>
+    </div>
+
+    <textarea id="userInput" placeholder="Example: I want somewhere calm, beautiful, not crowded, and good for sunset..."></textarea>
+
+</div>
 <div class="filters">
   <select id="budgetFilter">
     <option value="">Any budget</option>
@@ -682,9 +795,11 @@ Discover places that match your mood, not the crowd.
     </div>
 <br>
 
-<button onclick="findPlace()">Find My Place</button>
-<button onclick="showAllPlaces()">All Places</button>
-<button onclick="window.surpriseMe()">✨ Surprise Me</button>
+<div class="action-row">
+    <button class="primary-action" onclick="findPlace()">✨ Find My Place</button>
+    <button class="secondary-action" onclick="showAllPlaces()">🌍 All Places</button>
+    <button class="secondary-action" onclick="window.surpriseMe()">🌙 Surprise Me</button>
+</div>
     <button onclick="showAboutPage()">
 ℹ️ About Solace
 </button>
