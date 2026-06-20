@@ -16,6 +16,118 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .input-compass-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:28px;
+    margin-top:20px;
+}
+
+.input-compass-row textarea{
+    width:62%;
+    max-width:620px;
+    margin-top:0;
+}
+
+.mini-compass-container{
+    width:250px;
+    padding:18px;
+    border-radius:26px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.30);
+}
+
+.mini-compass-title{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:10px;
+    opacity:0.95;
+}
+
+.mini-compass{
+    position:relative;
+    width:180px;
+    height:180px;
+    margin:auto;
+}
+
+.mini-compass-center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.22);
+    font-size:24px;
+    cursor:default;
+}
+
+.mini-compass-btn{
+    position:absolute;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    font-size:20px;
+    padding:6px;
+    transition:0.25s;
+}
+
+.mini-compass-btn span{
+    display:block;
+    font-size:9px;
+    margin-top:2px;
+}
+
+.mini-compass-btn:hover{
+    transform:scale(1.10);
+    background:rgba(170,150,255,0.26);
+    box-shadow:0 0 22px rgba(130,100,255,0.45);
+}
+
+.mini-north{
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.mini-south{
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.mini-west{
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.mini-east{
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+@media(max-width:850px){
+    .input-compass-row{
+        flex-direction:column;
+    }
+
+    .input-compass-row textarea{
+        width:90%;
+    }
+}
     .compass-container{
 
 margin:25px auto;
@@ -823,43 +935,37 @@ select:hover{
 </head>
 
 <body>
-<div class="compass-container">
+<div class="input-compass-row">
 
-<h3 class="compass-title">
-🧭 Choose the direction your heart wants to go
-</h3>
+    <textarea id="userInput" placeholder="Example: I want somewhere calm, beautiful, not crowded, and good for sunset..."></textarea>
 
-<div class="compass">
+    <div class="mini-compass-container">
 
-<button class="compass-btn north"
-onclick="setCompassMood('Adventure')">
-🏔
-<span>Adventure</span>
-</button>
+        <div class="mini-compass-title">🧭 Mood Compass</div>
 
-<button class="compass-btn east"
-onclick="setCompassMood('Nature')">
-🌿
-<span>Nature</span>
-</button>
+        <div class="mini-compass">
 
-<button class="compass-center">
-🌙
-</button>
+            <button class="mini-compass-btn mini-north" onclick="setCompassMood('Adventure')">
+                🏔<span>Adventure</span>
+            </button>
 
-<button class="compass-btn west"
-onclick="setCompassMood('Luxury')">
-🏙
-<span>Luxury</span>
-</button>
+            <button class="mini-compass-btn mini-east" onclick="setCompassMood('Nature')">
+                🌿<span>Nature</span>
+            </button>
 
-<button class="compass-btn south"
-onclick="setCompassMood('Healing')">
-🤍
-<span>Healing</span>
-</button>
+            <button class="mini-compass-center">🌙</button>
 
-</div>
+            <button class="mini-compass-btn mini-west" onclick="setCompassMood('Luxury')">
+                🏙<span>Luxury</span>
+            </button>
+
+            <button class="mini-compass-btn mini-south" onclick="setCompassMood('Healing')">
+                🤍<span>Healing</span>
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
