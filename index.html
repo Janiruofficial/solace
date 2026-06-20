@@ -16,6 +16,108 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .match-card{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    width:86%;
+    max-width:980px;
+    margin:22px auto;
+    padding:18px;
+    border-radius:26px;
+    background:rgba(255,255,255,0.11);
+    border:1px solid rgba(255,255,255,0.20);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.35);
+    cursor:pointer;
+    transition:0.28s ease;
+    text-align:left;
+}
+
+.match-card:hover{
+    transform:translateY(-6px) scale(1.015);
+    background:rgba(255,255,255,0.17);
+    box-shadow:
+        0 0 35px rgba(140,120,255,0.35),
+        0 24px 55px rgba(0,0,0,0.45);
+}
+
+.match-img{
+    width:230px;
+    height:150px;
+    object-fit:cover;
+    border-radius:20px;
+    flex-shrink:0;
+}
+
+.match-content{
+    flex:1;
+}
+
+.match-badge{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:999px;
+    background:rgba(124,58,237,0.55);
+    border:1px solid rgba(255,255,255,0.18);
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.match-content h2{
+    margin:4px 0;
+    font-size:30px;
+}
+
+.match-city{
+    font-size:16px;
+    opacity:0.85;
+    margin:4px 0 10px;
+}
+
+.match-desc{
+    font-size:16px;
+    line-height:1.45;
+    opacity:0.92;
+    margin:8px 0;
+}
+
+.match-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.match-tags span{
+    font-size:13px;
+    padding:7px 11px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.13);
+    border:1px solid rgba(255,255,255,0.13);
+}
+
+.match-arrow{
+    font-size:30px;
+    opacity:0.75;
+}
+
+@media(max-width:750px){
+    .match-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .match-img{
+        width:100%;
+        height:190px;
+    }
+
+    .match-tags{
+        justify-content:center;
+    }
+}
     .place-thumb{
     width:100%;
     height:135px;
@@ -730,17 +832,37 @@ matches = matches.slice(0, 5);
     } else {
 
     matches.forEach(place => {
-    html += `
-        <button onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
-                class="match-button">
+    const matchPercent = Math.min(99, Math.max(72, 70 + place.score * 3));
+    const previewTags = [
+        ...(place.moods || []),
+        ...(place.tags || [])
+    ].slice(0, 4);
 
-            <div class="match-info">
+    html += `
+        <div onclick="window.showPlaceDetailsBySavedName('${place.name.replaceAll("'", "\\'")}')"
+             class="match-card">
+
+            <img src="${place.real_image}" 
+                 class="match-img"
+                 onerror="this.src='placeholder.jpg'">
+
+            <div class="match-content">
+                <div class="match-badge">✨ ${matchPercent}% Match</div>
+
                 <h2>${place.name}</h2>
-                <p>📍 ${place.city}</p>
-                <p>${place.description}</p>
+
+                <p class="match-city">📍 ${place.city}</p>
+
+                <p class="match-desc">${place.description}</p>
+
+                <div class="match-tags">
+                    ${previewTags.map(tag => `<span>${tag}</span>`).join("")}
+                </div>
             </div>
 
-        </button>
+            <div class="match-arrow">›</div>
+
+        </div>
     `;
 });
     }
