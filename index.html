@@ -16,6 +16,36 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .logo-compass-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:34px;
+    margin-bottom:22px;
+}
+
+.logo-compass-row .logo-glow{
+    width:230px;
+    margin-bottom:0;
+}
+
+.logo-compass-row .mini-compass-container{
+    width:250px;
+    padding:18px;
+    border-radius:26px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.30);
+}
+
+@media(max-width:850px){
+    .logo-compass-row{
+        flex-direction:column;
+        gap:18px;
+    }
+}
     .input-compass-row{
     display:flex;
     justify-content:center;
@@ -935,9 +965,9 @@ select:hover{
 </head>
 
 <body>
-<div class="input-compass-row">
+<div class="logo-compass-row">
 
-    <textarea id="userInput" placeholder="Example: I want somewhere calm, beautiful, not crowded, and good for sunset..."></textarea>
+    <img src="logo.png" alt="Solace Logo" class="logo-glow">
 
     <div class="mini-compass-container">
 
@@ -971,7 +1001,7 @@ select:hover{
 
 <div class="hero-card">
 
-    <img src="logo.png" alt="Solace Logo" class="logo-glow">
+    
 
     <div class="hero-title">
         Discover places that match your mood, not the crowd.
