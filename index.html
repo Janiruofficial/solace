@@ -16,6 +16,140 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .compass-container{
+
+margin:25px auto;
+
+}
+
+.compass-title{
+
+font-size:24px;
+margin-bottom:30px;
+
+}
+
+.compass{
+
+position:relative;
+
+width:330px;
+
+height:330px;
+
+margin:auto;
+
+}
+
+.compass-center{
+
+position:absolute;
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+width:95px;
+
+height:95px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.18);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.25);
+
+font-size:40px;
+
+cursor:default;
+
+}
+
+.compass-btn{
+
+position:absolute;
+
+width:95px;
+
+height:95px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.10);
+
+backdrop-filter:blur(14px);
+
+border:1px solid rgba(255,255,255,.18);
+
+transition:.35s;
+
+font-size:32px;
+
+}
+
+.compass-btn span{
+
+display:block;
+
+font-size:13px;
+
+margin-top:6px;
+
+}
+
+.compass-btn:hover{
+
+transform:scale(1.12);
+
+background:rgba(170,150,255,.25);
+
+box-shadow:0 0 30px rgba(120,90,255,.45);
+
+}
+
+.north{
+
+top:0;
+
+left:50%;
+
+transform:translateX(-50%);
+
+}
+
+.south{
+
+bottom:0;
+
+left:50%;
+
+transform:translateX(-50%);
+
+}
+
+.west{
+
+left:0;
+
+top:50%;
+
+transform:translateY(-50%);
+
+}
+
+.east{
+
+right:0;
+
+top:50%;
+
+transform:translateY(-50%);
+
+}
     .hero-card{
     max-width:950px;
     margin:0 auto;
@@ -689,7 +823,45 @@ select:hover{
 </head>
 
 <body>
+<div class="compass-container">
 
+<h3 class="compass-title">
+🧭 Choose the direction your heart wants to go
+</h3>
+
+<div class="compass">
+
+<button class="compass-btn north"
+onclick="setCompassMood('Adventure')">
+🏔
+<span>Adventure</span>
+</button>
+
+<button class="compass-btn east"
+onclick="setCompassMood('Nature')">
+🌿
+<span>Nature</span>
+</button>
+
+<button class="compass-center">
+🌙
+</button>
+
+<button class="compass-btn west"
+onclick="setCompassMood('Luxury')">
+🏙
+<span>Luxury</span>
+</button>
+
+<button class="compass-btn south"
+onclick="setCompassMood('Healing')">
+🤍
+<span>Healing</span>
+</button>
+
+</div>
+
+</div>
 
 <div class="hero-card">
 
@@ -1452,6 +1624,17 @@ document.getElementById("results").innerHTML = `
     }else{
         menu.style.display = "block";
     }
+};
+    window.setCompassMood = function(mood){
+
+const box =
+document.getElementById("userInput");
+
+box.value =
+"I want somewhere " + mood.toLowerCase();
+
+box.focus();
+
 };
 </script>
 
