@@ -15,7 +15,16 @@ body{
     font-family:Arial, sans-serif;
     text-align:center;
     padding-top:100px;
-}    .place-detail-card{
+}  
+    .place-thumb{
+    width:100%;
+    height:135px;
+    object-fit:cover;
+    border-radius:16px;
+    margin-bottom:14px;
+    background:rgba(255,255,255,0.08);
+}
+    .place-detail-card{
     background:rgba(22,27,34,0.88);
     padding:28px;
     border-radius:24px;
@@ -45,20 +54,13 @@ body{
     background:rgba(255,255,255,0.10);
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
-
     border:1px solid rgba(255,255,255,0.18);
-
     border-radius:22px;
-
-    padding:22px 15px;
-
+    padding:14px;
     cursor:pointer;
-
     transition:.25s;
-
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
-
 .place-button:hover{
 
     transform:translateY(-6px) scale(1.03);
@@ -754,15 +756,17 @@ document.getElementById("results").innerHTML = html;
 html += '<div class="places-grid">';
 
 places.forEach((place, index) => {
-    html += `
-        <div onclick="window.showPlaceDetailsByIndex(${index})"
-             class="place-button">
+   html += `
+    <div onclick="window.showPlaceDetailsByIndex(${index})"
+         class="place-button">
 
-            <h3>${place.name}</h3>
-            <p>📍 ${place.city}</p>
+        <img src="${place.real_image}" class="place-thumb">
 
-        </div>
-    `;
+        <h3>${place.name}</h3>
+        <p>📍 ${place.city}</p>
+
+    </div>
+`;
 });
 
 html += "</div>";
