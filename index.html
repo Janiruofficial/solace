@@ -16,6 +16,48 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .extra-info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:25px auto;
+}
+
+.extra-info-card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:18px;
+    padding:14px;
+    font-size:15px;
+    backdrop-filter:blur(12px);
+}
+
+.extra-info-card strong{
+    display:block;
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.score-bar{
+    width:100%;
+    height:8px;
+    background:rgba(255,255,255,0.13);
+    border-radius:999px;
+    margin-top:8px;
+    overflow:hidden;
+}
+
+.score-fill{
+    height:100%;
+    background:linear-gradient(135deg,#8b5cf6,#38bdf8);
+    border-radius:999px;
+}
+
+@media(max-width:700px){
+    .extra-info-grid{
+        grid-template-columns:1fr;
+    }
+}
     .category-filter-panel{
     max-width:1300px;
     margin:35px auto 20px;
@@ -1449,6 +1491,39 @@ window.filterPlacesByCategory = function(category){
 
 window.showPlaceDetails = function(place) {
    window.saveRecentlyViewed(place.name);
+    const hasExtraInfo =
+    place.noise_level !== undefined ||
+    place.google_rating !== undefined ||
+    place.visit_duration !== undefined ||
+    place.family_score !== undefined ||
+    place.romance_score !== undefined ||
+    place.adventure_score !== undefined ||
+    place.food_quality_score !== undefined ||
+    place.service_score !== undefined ||
+    place.uniqueness_score !== undefined;
+
+const scoreCard = (icon, label, value) => {
+    if (value === undefined) return "";
+    return `
+        <div class="extra-info-card">
+            <strong>${icon} ${label}</strong>
+            ${value}/10
+            <div class="score-bar">
+                <div class="score-fill" style="width:${value * 10}%"></div>
+            </div>
+        </div>
+    `;
+};
+
+const yesNoCard = (icon, label, value) => {
+    if (value === undefined) return "";
+    return `
+        <div class="extra-info-card">
+            <strong>${icon} ${label}</strong>
+            ${value ? "Yes" : "No"}
+        </div>
+    `;
+};
     let html = `
         <div class="place-detail-card">
 
@@ -1468,6 +1543,54 @@ window.showPlaceDetails = function(place) {
                 <span>👥 ${place.crowd_label}</span>
                 <span>🕒 ${place.best_time.join(", ")}</span>
             </div>
+            ${hasExtraInfo ? `
+    <div class="extra-info-grid">
+
+        ${place.google_rating !== undefined ? `
+            <div class="extra-info-card">
+                <strong>⭐ Google Rating</strong>
+                ${place.google_rating}
+            </div>
+        ` : ""}
+
+        ${place.noise_level !== undefined ? `
+            <div class="extra-info-card">
+                <strong>🔇 Noise Level</strong>
+                ${place.noise_level}/10
+                <div class="score-bar">
+                    <div class="score-fill" style="width:${place.noise_level * 10}%"></div>
+                </div>
+            </div>
+        ` : ""}
+
+        ${place.weather_best ? `
+            <div class="extra-info-card">
+                <strong>🌦 Best Weather</strong>
+                ${place.weather_best.join(", ")}
+            </div>
+        ` : ""}
+
+        ${place.visit_duration ? `
+            <div class="extra-info-card">
+                <strong>⏱ Visit Duration</strong>
+                ${place.visit_duration}
+            </div>
+        ` : ""}
+
+        ${yesNoCard("♿", "Wheelchair Accessible", place.wheelchair_accessible)}
+        ${yesNoCard("🐶", "Pet Friendly", place.pet_friendly)}
+        ${yesNoCard("🚗", "Parking", place.parking)}
+        ${yesNoCard("🚌", "Public Transport", place.public_transport)}
+
+        ${scoreCard("👨‍👩‍👧", "Family", place.family_score)}
+        ${scoreCard("❤️", "Romance", place.romance_score)}
+        ${scoreCard("🧗", "Adventure", place.adventure_score)}
+        ${scoreCard("🍽", "Food Quality", place.food_quality_score)}
+        ${scoreCard("🛎", "Service", place.service_score)}
+        ${scoreCard("✨", "Uniqueness", place.uniqueness_score)}
+
+    </div>
+` : ""}
 
             <div class="section">
                 <strong>Moods</strong>
