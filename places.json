@@ -2414,53 +2414,48 @@
   "real_image": "flyingravana_real.jpg",
   "map_link": "https://www.google.com/maps/search/?api=1&query=Flying+Ravana+Mega+Zipline+Ella"
 },
-  ${hasExtraInfo ? `
-    <div class="extra-info-grid">
+ {
+  "name": "Nelum Pokuna Theatre",
+  "city": "Colombo",
+  "category": "culture",
+  "description": "A grand performing arts theatre in Colombo known for concerts, stage performances, cultural events, elegant architecture, and formal evening experiences.",
+  "tags": [
+    "theatre", "culture", "colombo", "performing arts", "concerts", "stage",
+    "music", "events", "architecture", "formal", "evening", "night",
+    "date", "family", "friends", "indoor", "air conditioned", "premium",
+    "photography", "art", "creative", "urban", "city", "elegant",
+    "cultural", "shows", "performance", "modern", "safe", "special occasion"
+  ],
+  "moods": ["inspired", "elegant", "creative", "excited", "social", "curious"],
+  "aesthetics": ["modern", "architectural", "elegant", "urban", "bright", "formal"],
+  "activities": ["watching performances", "concerts", "photography", "date night", "cultural events"],
+  "budget": 6,
+  "budget_label": "Mid-Range",
+  "crowd": 7,
+  "crowd_label": "Medium-High",
+  "best_time": ["evening", "night"],
+  "peace_score": 6,
+  "aesthetic_score": 9,
+  "privacy_score": 6,
 
-        ${place.google_rating !== undefined ? `
-            <div class="extra-info-card">
-                <strong>⭐ Google Rating</strong>
-                ${place.google_rating}
-            </div>
-        ` : ""}
+  "noise_level": 7,
+  "weather_best": ["sunny", "cloudy", "rainy"],
+  "visit_duration": "2-3 hours",
+  "wheelchair_accessible": true,
+  "pet_friendly": false,
+  "parking": true,
+  "public_transport": true,
+  "google_rating": 4.5,
+  "family_score": 8,
+  "romance_score": 7,
+  "adventure_score": 2,
+  "food_quality_score": 0,
+  "service_score": 7,
+  "uniqueness_score": 8,
 
-        ${place.noise_level !== undefined ? `
-            <div class="extra-info-card">
-                <strong>🔇 Noise Level</strong>
-                ${place.noise_level}/10
-                <div class="score-bar">
-                    <div class="score-fill" style="width:${place.noise_level * 10}%"></div>
-                </div>
-            </div>
-        ` : ""}
-
-        ${place.weather_best ? `
-            <div class="extra-info-card">
-                <strong>🌦 Best Weather</strong>
-                ${place.weather_best.join(", ")}
-            </div>
-        ` : ""}
-
-        ${place.visit_duration ? `
-            <div class="extra-info-card">
-                <strong>⏱ Visit Duration</strong>
-                ${place.visit_duration}
-            </div>
-        ` : ""}
-
-        ${yesNoCard("♿", "Wheelchair Accessible", place.wheelchair_accessible)}
-        ${yesNoCard("🐶", "Pet Friendly", place.pet_friendly)}
-        ${yesNoCard("🚗", "Parking", place.parking)}
-        ${yesNoCard("🚌", "Public Transport", place.public_transport)}
-
-        ${scoreCard("👨‍👩‍👧", "Family", place.family_score)}
-        ${scoreCard("❤️", "Romance", place.romance_score)}
-        ${scoreCard("🧗", "Adventure", place.adventure_score)}
-        ${scoreCard("🍽", "Food Quality", place.food_quality_score)}
-        ${scoreCard("🛎", "Service", place.service_score)}
-        ${scoreCard("✨", "Uniqueness", place.uniqueness_score)}
-
-    </div>
-` : ""}
+  "mood_image": "nelumpokuna_mood.jpg",
+  "real_image": "nelumpokuna_real.jpg",
+  "map_link": "https://www.google.com/maps/search/?api=1&query=Nelum+Pokuna+Theatre+Colombo"
+}
 
 ]
