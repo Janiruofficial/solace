@@ -1221,9 +1221,22 @@ async function findPlace() {
 
     const userText = document.getElementById("userInput").value.toLowerCase();
 
-    const response = await fetch("places.json");
-    const places = await response.json();
+   const files = [
+    "places.json",
+    "data/attractions.json"
+];
 
+let places = [];
+
+for (const file of files) {
+
+    const response = await fetch(file);
+
+    const data = await response.json();
+
+    places.push(...data);
+
+}
 let matches = [];
 
 const budgetFilter = document.getElementById("budgetFilter").value;
