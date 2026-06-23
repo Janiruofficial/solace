@@ -1217,26 +1217,33 @@ Your Matches
 <div id="results" style="margin-top:20px;"></div>
 
     <script>
-async function findPlace() {
+window.loadAllPlaces = async function() {
+    const files = [
+        "places.json",
+        "attractions.json"
+    ];
+
+    let allPlaces = [];
+
+    for (const file of files) {
+        const response = await fetch(file);
+
+        if (!response.ok) {
+            console.error("Could not load:", file);
+            continue;
+        }
+
+        const data = await response.json();
+        allPlaces.push(...data);
+    }
+
+    return allPlaces;
+};
+        async function findPlace() {
 
     const userText = document.getElementById("userInput").value.toLowerCase();
 
-   const files = [
-    "places.json",
-    "data/attractions.json"
-];
-
-let places = [];
-
-for (const file of files) {
-
-    const response = await fetch(file);
-
-    const data = await response.json();
-
-    places.push(...data);
-
-}
+  const places = await window.loadAllPlaces();
 let matches = [];
 
 const budgetFilter = document.getElementById("budgetFilter").value;
@@ -1466,10 +1473,11 @@ function renderPlacesGrid(places, activeCategory = "all"){
 }
 
 async function showAllPlaces() {
-    const response = await fetch("places.json");
-    allPlacesCache = await response.json();
+
+    allPlacesCache = await window.loadAllPlaces();
 
     renderPlacesGrid(allPlacesCache, "all");
+
 }
 
 window.filterPlacesByCategory = function(category){
@@ -1497,8 +1505,7 @@ window.filterPlacesByCategory = function(category){
     renderPlacesGrid(filtered, category);
 };
        window.showPlaceDetailsByIndex = async function(index) {
-    const response = await fetch("places.json");
-    const places = await response.json();
+   const places = await window.loadAllPlaces();
 
     window.showPlaceDetails(places[index]);
 }
@@ -1739,9 +1746,7 @@ window.removeSavedPlace = async function(placeName) {
   const savedRef = collection(db, "users", window.currentUser.uid, "savedPlaces");
   const snapshot = await getDocs(savedRef);
 
-  const response = await fetch("places.json");
-  const allPlaces = await response.json();
-
+  const places = await window.loadAllPlaces();
   let html = "<h2>❤️ My Saved Places</h2>";
 
   if (snapshot.empty) {
@@ -1789,8 +1794,7 @@ window.sharePlace = function(placeName) {
     });
 };
 window.showPlaceDetailsBySavedName = async function(placeName) {
-  const response = await fetch("places.json");
-  const places = await response.json();
+const places = await window.loadAllPlaces();
 
   const place = places.find(p => p.name === placeName);
 
@@ -1811,8 +1815,7 @@ window.showPlaceDetailsBySavedName = async function(placeName) {
 window.showRecentlyViewed = async function() {
     const recent = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
 
-    const response = await fetch("places.json");
-    const places = await response.json();
+   const places = await window.loadAllPlaces();
 
     let html = "<h2>🕘 Recently Viewed</h2>";
 
@@ -1839,9 +1842,7 @@ window.showRecentlyViewed = async function() {
     window.searchPlaceByName = async function() {
     const searchText = document.getElementById("placeSearchInput").value.toLowerCase();
 
-    const response = await fetch("places.json");
-    const places = await response.json();
-
+   const places = await window.loadAllPlaces();
     const matches = places.filter(place =>
         place.name.toLowerCase().includes(searchText) ||
         place.city.toLowerCase().includes(searchText)
@@ -1880,9 +1881,7 @@ window.showRecentlyViewed = async function() {
         return;
     }
 
-    const response = await fetch("places.json");
-    const places = await response.json();
-
+   const places = await window.loadAllPlaces();
     const matches = places.filter(place =>
         place.name.toLowerCase().includes(text)
     );
@@ -1920,8 +1919,7 @@ window.showRecentlyViewed = async function() {
         "Some places choose us."
     ];
 
-    const response = await fetch("places.json");
-    const places = await response.json();
+  const places = await window.loadAllPlaces();
 
     const randomPlace = places[Math.floor(Math.random() * places.length)];
         window.createSparkles();
