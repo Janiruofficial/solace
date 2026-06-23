@@ -16,6 +16,48 @@ body{
     text-align:center;
     padding-top:100px;
 }  
+    .category-filter-panel{
+    max-width:1300px;
+    margin:35px auto 20px;
+    padding:22px;
+    border-radius:30px;
+    background:rgba(8,12,28,0.45);
+    border:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(18px);
+    box-shadow:0 0 45px rgba(95,75,255,0.25);
+}
+
+.category-title{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.category-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:11px;
+}
+
+.category-btn{
+    border-radius:999px;
+    padding:11px 17px;
+    background:rgba(255,255,255,0.09);
+    border:1px solid rgba(255,255,255,0.16);
+    color:white;
+    font-size:14px;
+}
+
+.category-btn:hover{
+    background:rgba(150,120,255,0.28);
+    box-shadow:0 0 22px rgba(130,100,255,0.38);
+}
+
+.category-btn.active-category{
+    background:linear-gradient(135deg,#8b5cf6,#2563eb);
+    box-shadow:0 0 28px rgba(120,90,255,0.55);
+}
     .logo-compass-row{
     display:flex;
     justify-content:center;
@@ -1293,31 +1335,111 @@ matches = matches.slice(0, 5);
     document.getElementById("resultsTitle").style.display = "block";
 document.getElementById("results").innerHTML = html;
 }
-        async function showAllPlaces() {
-    const response = await fetch("places.json");
-    const places = await response.json();
+       let allPlacesCache = [];
 
-  let html = "<h2>All Places</h2>";
-html += '<div class="places-grid">';
+const categoryFilters = [
+    ["all", "🌍 All"],
+    ["hotel", "🏨 Hotels"],
+    ["restaurant", "🍽 Restaurants"],
+    ["cafe", "☕ Cafés"],
+    ["bar", "🍸 Bars & Pubs"],
+    ["mall", "🛍 Malls"],
+    ["shopping", "🛒 Shopping"],
+    ["nature", "🌿 Nature"],
+    ["beach", "🏖 Beaches"],
+    ["park", "🌳 Parks"],
+    ["botanical garden", "🌸 Gardens"],
+    ["zoo", "🦁 Zoos"],
+    ["safari", "🐘 Safari"],
+    ["wildlife", "🦚 Wildlife"],
+    ["mountain", "⛰ Mountains"],
+    ["lake", "🌊 Lakes"],
+    ["waterfall", "💦 Waterfalls"],
+    ["tea estate", "🍃 Tea Estates"],
+    ["luxury", "💎 Luxury"],
+    ["romantic", "❤️ Romantic"],
+    ["family", "👨‍👩‍👧 Family"],
+    ["hidden gem", "✨ Hidden Gems"],
+    ["peaceful", "🧘 Peaceful"],
+    ["free", "🆓 Free"],
+    ["photography", "📸 Photo Spots"]
+];
 
-places.forEach((place, index) => {
-   html += `
-    <div onclick="window.showPlaceDetailsByIndex(${index})"
-         class="place-button">
-
-        <img src="${place.real_image}" class="place-thumb">
-
-        <h3>${place.name}</h3>
-        <p>📍 ${place.city}</p>
-
-    </div>
-`;
-});
-
-html += "</div>";
-
-document.getElementById("results").innerHTML = html;
+function renderCategoryFilters(activeCategory = "all"){
+    return `
+        <div class="category-filter-panel">
+            <div class="category-title">Explore by feeling, place, or purpose</div>
+            <div class="category-grid">
+                ${categoryFilters.map(filter => `
+                    <button 
+                        class="category-btn ${filter[0] === activeCategory ? "active-category" : ""}"
+                        onclick="filterPlacesByCategory('${filter[0]}')">
+                        ${filter[1]}
+                    </button>
+                `).join("")}
+            </div>
+        </div>
+    `;
 }
+
+function renderPlacesGrid(places, activeCategory = "all"){
+    let html = "<h2>All Places</h2>";
+    html += renderCategoryFilters(activeCategory);
+    html += '<div class="places-grid">';
+
+    places.forEach((place) => {
+        const realIndex = allPlacesCache.findIndex(p => p.name === place.name);
+
+        html += `
+            <div onclick="window.showPlaceDetailsByIndex(${realIndex})"
+                 class="place-button">
+
+                <img src="${place.real_image}" 
+                     class="place-thumb"
+                     onerror="this.src='placeholder.jpg'">
+
+                <h3>${place.name}</h3>
+                <p>📍 ${place.city}</p>
+
+            </div>
+        `;
+    });
+
+    html += "</div>";
+    document.getElementById("results").innerHTML = html;
+}
+
+async function showAllPlaces() {
+    const response = await fetch("places.json");
+    allPlacesCache = await response.json();
+
+    renderPlacesGrid(allPlacesCache, "all");
+}
+
+window.filterPlacesByCategory = function(category){
+    if(category === "all"){
+        renderPlacesGrid(allPlacesCache, "all");
+        return;
+    }
+
+    const filtered = allPlacesCache.filter(place => {
+        const searchable = `
+            ${place.name}
+            ${place.city}
+            ${place.description}
+            ${(place.tags || []).join(" ")}
+            ${(place.moods || []).join(" ")}
+            ${(place.aesthetics || []).join(" ")}
+            ${(place.activities || []).join(" ")}
+            ${place.budget_label}
+            ${place.crowd_label}
+        `.toLowerCase();
+
+        return searchable.includes(category.toLowerCase());
+    });
+
+    renderPlacesGrid(filtered, category);
+};
        window.showPlaceDetailsByIndex = async function(index) {
     const response = await fetch("places.json");
     const places = await response.json();
